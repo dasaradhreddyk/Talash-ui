@@ -1,0 +1,75 @@
+
+<table style="margin-left: 100px" >
+
+    <tr>
+<td  style="height:500px">
+    <div class="bigbuttons1">
+           <div >
+        <label style="padding:10px">UserName: </label>
+        <input style="padding:20px" type="Text" [(ngModel)]="userid" style="width:250px" />
+    </div>
+    <div >
+        <label style="padding:10px">Select Time</label>
+        <input style="padding:20px" type="datetime-local" style="width:250px" />
+    </div>
+    <div >
+        <label style="padding:10px">Room Name</label>
+        <select style="padding:20px" [(ngModel)]="roomname" type="datetime-local" style="width:250px" >
+            <option>Physics</option>
+            <option>Maths</option>
+            <option>Computers</option>
+        </select>
+    </div>
+    <div style="padding:10px">
+        <button    (click)="createMeeting()"   >Create Meeting</button>
+        <button    (click)="createMeeting()"   >Join Meeting</button>
+        <br>
+        <hr>
+       <b> <i>Please note that Only logged in users can create meeting.</i></b><br>
+       <b> <i>Logged in User can join chat rooms based on authorisation</i></b><br>
+    
+       <b> <i>Chat rooms can be hosted on any other web site with custom room names
+        and configuraiton and with recording saved to AWS / AZRURE. This module is
+        totally while labelled. please contct Sales.</i></b><br>
+    
+    
+    </div>
+    <div style="padding:10px">  
+        
+       
+      <!-- <input style="width:400px" value='https://app.dyte.io/v2/meeting?id={{meetingid}}' type="text "/>  -->
+    </div>
+</div>
+ 
+</td>
+<td >
+    <div class="bigbuttons5">
+   
+    
+    <button disabled="true" (click)="JoinMeetingroom('physics')" class="pushable"><span class="front">
+        Sales
+      </span></button>
+      <button (click)="JoinMeetingroom('physics')"  > <span >
+        Join
+      </span></button>
+      <hr>
+    <button disabled="true" (click)="JoinMeetingroom('maths')" class="pushable" ><span class="front">
+        Customer casre
+      </span></button>
+      <button (click)="JoinMeetingroom('maths')"  > <span >
+        Join
+      </span></button>
+      <hr>
+    <button disabled="true" (click)="JoinMeetingroom('computers')" class="pushable"><span class="front">
+        General
+      </span></button>
+      <button (click)="JoinMeetingroom('computers')"  > <span >
+        Join
+      </span></button>
+    </div>
+</td>
+</tr>
+</table>
+<div *ngIf="showMeetingroom" >
+    <app-meetings  [roomname]="roomname"></app-meetings>
+</div>

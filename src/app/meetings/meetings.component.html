@@ -1,0 +1,32 @@
+<table >
+
+    <tr><td  >
+        <div class="bigbuttons1">
+            <dyte-meeting #myid></dyte-meeting>
+        </div>
+    </td>
+<td  >
+    <div class="bigbuttons1">
+           <div style="padding:20px">
+        <label style="padding:20px">UserName: </label>
+        <input type="Text" style="width:250px" />
+    </div>
+    <div style="padding:10px">
+        <label style="padding:20px">Select Time</label>
+        <input type="datetime-local" style="width:250px" />
+    </div>
+    <div style="padding:10px">
+        <button      (click)="createMeeting()">Create Meeting</button>
+       <H5> <i>Please note that Only logged in users can create meeting.</i></H5>
+    
+    </div>
+    <div style="padding:10px">
+        <label>Meeting URL:</label>
+       
+      <input style="width:400px" value='https://app.dyte.io/v2/meeting?id={{meetingid}}' type="text "/> 
+    </div>
+</div>
+ 
+</td></tr>
+</table>
+

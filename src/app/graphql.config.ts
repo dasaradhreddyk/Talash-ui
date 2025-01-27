@@ -1,0 +1,1 @@
+export const myUrl = 'https://groupdiscussion-aebnhpc7fdhrbcc2.australiasoutheast-01.azurewebsites.net/graphql';
