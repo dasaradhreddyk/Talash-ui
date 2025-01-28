@@ -26,24 +26,17 @@ export class ImageViewerComponent {
   ) {
     this.searchword ="nature";    
 
-    this.atService.getImagedata(this.searchword)
-    .subscribe((res: any) => {
-        this.data = res;
-     
-    }, (err: any) => {
-        console.log(err);
-    });
-    
+  
       this.apollo.watchQuery({
         query: this.imageViewerService.getBookById,
         
   
       }).valueChanges.subscribe((res:any)=>{
-        //console.log("*********** finally graphql " + JSON.stringify(res))
+      
         this.data = res.data.images;
         console.log(JSON.stringify(this.data))
          
-       // this.data.forEach(x => { console.log(x.url);this.imageList.push(x.url)});      
+            
       })
   
     
@@ -51,18 +44,12 @@ export class ImageViewerComponent {
   }
   ngOnChanges(changes: SimpleChanges) {
 
-    this.atService.getImagedata(this.searchword)
-      .subscribe((res: any) => {
-        this.data = res;
-       
-      }, (err: any) => {
-        //console.log(err);
-      });
+    
       this.apollo.watchQuery({
         query: this.imageViewerService.getBookById,        
   
       }).valueChanges.subscribe((res:any)=>{
-        //console.log("*********** finally graphql " + JSON.stringify(res))
+        
         this.data = res.data.images;
       //  console.log(JSON.stringify(this.data))
          
