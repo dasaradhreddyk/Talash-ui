@@ -1,5 +1,11 @@
-<ul>
-    <li *ngFor="let item of imageList"><img  class="responsive"    
-  
-      [src]="item" /></li>
+<ul  class="no-bullets">
+    <li *ngFor="let item of imageCompleteDetails">
+      <div class="myDIV">&#x1F6C8;</div><div class="hide"><br><img height="30" width="30" src="https://static.vecteezy.com/system/resources/previews/000/420/238/original/like-icon-vector-illustration.jpg">{{item.likes}}
+      </div>
+      
+      
+      <img  class="responsive"  [src]="item.url" />
+      </li>
+        
+      <li></li>
 </ul>

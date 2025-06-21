@@ -1,3 +1,8 @@
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
 ul{
     -webkit-columns: 3;
     -moz-columns: 3;
@@ -5,6 +10,28 @@ ul{
 }
 
 .responsive {
-    width:100%;height:349;padding-bottom:16%;position:relative;
+    width:90%;height:249;padding-bottom:16%;position:relative;
   }
   
+  .hide {
+  display: none;
+  align-items: center ;
+  align-content: center;
+  
+}
+ .show {
+  display: inline;
+  align-items: center ;
+  align-content: center;
+}
+
+.myDIV:hover + .hide {
+  display: block;
+  color: red;
+  transition-duration: 20s;
+}
+.myDIV:hover + .show {
+  display: block;
+  color: red;
+}
+

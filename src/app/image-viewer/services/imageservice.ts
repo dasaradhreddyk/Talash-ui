@@ -12,6 +12,7 @@ export class ImageViewerService {
 query getBookByID{
   images{
     url
+    likes
 
   }
 

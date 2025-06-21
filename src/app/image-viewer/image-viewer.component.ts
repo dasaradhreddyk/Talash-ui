@@ -19,6 +19,7 @@ export class ImageViewerComponent {
   //searchword: string = "";
   @Input() searchword: string="";
   imageList: any[] = [];
+  imageCompleteDetails: any[] = [];
   loading : boolean = true;
 
   constructor( private atService: AdventureTimeService,private apollo : Apollo
@@ -34,9 +35,17 @@ export class ImageViewerComponent {
       }).valueChanges.subscribe((res:any)=>{
       
         this.data = res.data.images;
-        console.log(JSON.stringify(this.data))
-         
-            
+      //  console.log(JSON.stringify(this.data))
+         this.data.forEach(x => { 
+        //  console.log(x.url);
+          this.imageList.push(x.url)
+          let imageData: imagedata = {
+            url: x.url,likes: x.likes
+          };
+          this.imageCompleteDetails.push(imageData);
+        
+        });      
+        
       })
   
     
@@ -49,20 +58,35 @@ export class ImageViewerComponent {
         query: this.imageViewerService.getBookById,        
   
       }).valueChanges.subscribe((res:any)=>{
+       // console.log("Changes detected" + JSON.stringify(res.data.images)  );
         
         this.data = res.data.images;
       //  console.log(JSON.stringify(this.data))
          
-        this.data.forEach(x => { console.log(x.url);this.imageList.push(x.url)});       
+        this.data.forEach(x => { 
+        //  console.log(x.url);
+          this.imageList.push(x.url)
+          let imageData: imagedata = {
+            url: x.url,likes: x.likes
+          };
+          this.imageCompleteDetails.push(imageData);
+        
+        });       
       
       })
+     // console.log("Image List: " + JSON.stringify(this.imageList));
+      console.log("Image Complete Details: " + JSON.stringify(this.imageCompleteDetails));  
   }
   imageURL(url :any) {
-    console.log(this.sanitizer.bypassSecurityTrustUrl(url));
+   // console.log(this.sanitizer.bypassSecurityTrustUrl(url));
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
   ngInit()
   {
    
   }
+}
+interface imagedata{
+  url: string;
+  likes: number;
 }
