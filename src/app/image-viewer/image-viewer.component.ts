@@ -1,4 +1,4 @@
-import { Component ,SimpleChanges,Input } from '@angular/core';
+import { Component ,SimpleChanges,Input, OnInit } from '@angular/core';
 import { AdventureTimeService } from '../services/adventure-time.service';
 
 import { Apollo } from 'apollo-angular';
@@ -7,13 +7,14 @@ import { GET_IMAGES } from './../graphql.queries/graphql.countries.queries';
 import { ImageViewerService} from './services/imageservice'
 import { stringify } from 'querystring';
 import { DomSanitizer } from "@angular/platform-browser";
+import { AppSignalRService } from '../services/app-signalr.service';
 
 @Component({
   selector: 'app-image-viewer',
   templateUrl: './image-viewer.component.html',
   styleUrls: ['./image-viewer.component.css']
 })
-export class ImageViewerComponent {
+export class ImageViewerComponent implements OnInit {
 
   data: any[] = [];
   //searchword: string = "";
@@ -21,9 +22,12 @@ export class ImageViewerComponent {
   imageList: any[] = [];
   imageCompleteDetails: any[] = [];
   loading : boolean = true;
+  ShowLikes : boolean = false;
+  receivedMessage: string ="";
 
   constructor( private atService: AdventureTimeService,private apollo : Apollo
     , private imageViewerService:ImageViewerService,private sanitizer: DomSanitizer
+    ,private signalRService: AppSignalRService
   ) {
     this.searchword ="nature";    
 
@@ -51,11 +55,52 @@ export class ImageViewerComponent {
     
 
   }
+ngOnInit(): void {
+    this.signalRService.startConnection().subscribe(() => {
+      this.signalRService.receiveMessage().subscribe((message) => {
+        this.receivedMessage = message;
+         this.imageCompleteDetails.forEach((item) => {
+      if (item.url === message) {
+        item.likes += 1; // Increment likes for the specific image
+      }
+    });
+        console.log(this.receivedMessage);
+      });
+    });
+  }
+  UpdateLikes(url: string) {
+  {
+    
+    
+    this.apollo.mutate({
+        mutation: this.imageViewerService.updateLikes,
+        variables: {
+          applicaitonId:"",         
+          actionId:"",
+           url: url,
+          
+        },
+      }).subscribe();
+      
+    this.sendMessage( url);
+    // this.imageCompleteDetails.forEach((item) => {
+    //   if (item.url === url) {
+    //     item.likes += 1; // Increment likes for the specific image
+    //   }
+    // });
+    console.log("Show Likes: " + this.ShowLikes);
+  }
+}
+
+sendMessage(message: string): void {
+    this.signalRService.sendMessage(message);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
 
     
       this.apollo.watchQuery({
-        query: this.imageViewerService.getBookById,        
+        query: this.imageViewerService.getBookById,   fetchPolicy: 'no-cache'     
   
       }).valueChanges.subscribe((res:any)=>{
        // console.log("Changes detected" + JSON.stringify(res.data.images)  );

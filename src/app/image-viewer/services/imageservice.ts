@@ -6,7 +6,10 @@ import { gql } from 'apollo-angular'
 })
 export class ImageViewerService {
 
+  
   constructor() { }
+
+  
   getBookById = gql`
 
 query getBookByID{
@@ -17,4 +20,17 @@ query getBookByID{
   }
 
 }
-`}
+`
+ updateLikes  = gql`
+  mutation likeContent($applicaitonId: String!, $actionId: String!, $url: String!){ 
+  
+  likeContent(applicaitonId: $applicaitonId, actionId: $actionId, url: $url) {
+    status
+    
+  }
+}
+`;
+
+
+
+}
