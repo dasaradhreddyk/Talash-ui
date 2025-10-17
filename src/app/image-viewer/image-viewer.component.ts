@@ -1,4 +1,4 @@
-import { Component ,SimpleChanges,Input, OnInit } from '@angular/core';
+import { Component ,SimpleChanges,Input, OnInit,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AdventureTimeService } from '../services/adventure-time.service';
 
 import { Apollo } from 'apollo-angular';
@@ -9,10 +9,17 @@ import { stringify } from 'querystring';
 import { DomSanitizer } from "@angular/platform-browser";
 import { AppSignalRService } from '../services/app-signalr.service';
 
+
+
+
+
 @Component({
   selector: 'app-image-viewer',
   templateUrl: './image-viewer.component.html',
-  styleUrls: ['./image-viewer.component.css']
+  styleUrls: ['./image-viewer.component.css'],
+
+  
+  
 })
 export class ImageViewerComponent implements OnInit {
 
@@ -29,6 +36,44 @@ export class ImageViewerComponent implements OnInit {
     , private imageViewerService:ImageViewerService,private sanitizer: DomSanitizer
     ,private signalRService: AppSignalRService
   ) {
+    this.searchword ="nature";    
+
+  
+      // this.apollo.watchQuery({
+      //   query: this.imageViewerService.getBookById,
+        
+  
+      // }).valueChanges.subscribe((res:any)=>{
+      
+      //   this.data = res.data.images;
+      // //  console.log(JSON.stringify(this.data))
+      //    this.data.forEach(x => { 
+      //   //  console.log(x.url);
+      //     this.imageList.push(x.url)
+      //     let imageData: imagedata = {
+      //       url: x.url,likes: x.likes
+      //     };
+      //     this.imageCompleteDetails.push(imageData);
+        
+      //   });      
+        
+      // })
+  
+    
+
+  }
+ngOnInit(): void {
+    this.signalRService.startConnection().subscribe(() => {
+      this.signalRService.receiveMessage().subscribe((message) => {
+        this.receivedMessage = message;
+         this.imageCompleteDetails.forEach((item) => {
+      if (item.url === message) {
+        item.likes += 1; // Increment likes for the specific image
+      }
+    });
+        console.log(this.receivedMessage);
+      });
+    });
     this.searchword ="nature";    
 
   
@@ -52,21 +97,22 @@ export class ImageViewerComponent implements OnInit {
         
       })
   
-    
-
   }
-ngOnInit(): void {
-    this.signalRService.startConnection().subscribe(() => {
-      this.signalRService.receiveMessage().subscribe((message) => {
-        this.receivedMessage = message;
-         this.imageCompleteDetails.forEach((item) => {
-      if (item.url === message) {
-        item.likes += 1; // Increment likes for the specific image
-      }
-    });
-        console.log(this.receivedMessage);
-      });
-    });
+
+  deleteItem(url: string) {
+this.apollo.mutate({
+        mutation: this.imageViewerService.updatedelete,
+        variables: {
+          applicationId:"",         
+          actionId:"1", // Assuming you have an enum for actions
+           url: url,
+          
+        },
+        refetchQueries: [{
+          query: this.imageViewerService.getBookById,
+        }]
+      }).subscribe();
+    
   }
   UpdateLikes(url: string) {
   {
@@ -75,13 +121,16 @@ ngOnInit(): void {
     this.apollo.mutate({
         mutation: this.imageViewerService.updateLikes,
         variables: {
-          applicaitonId:"",         
-          actionId:"",
+           applicationId: "0", // fixed typo here
+          actionId:"0",
            url: url,
           
         },
+         refetchQueries: [{
+          query: this.imageViewerService.getBookById,
+        }]
       }).subscribe();
-      
+
     this.sendMessage( url);
     // this.imageCompleteDetails.forEach((item) => {
     //   if (item.url === url) {

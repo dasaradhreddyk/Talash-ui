@@ -21,10 +21,20 @@ query getBookByID{
 
 }
 `
+updatedelete = gql`
+
+mutation deleteContent($applicationId: String!, $actionId: String!, $url: String!){ 
+
+  deletecontent(applicationId: $applicationId, actionId: $actionId, url: $url) {
+    status
+    
+  }
+}
+`
  updateLikes  = gql`
-  mutation likeContent($applicaitonId: String!, $actionId: String!, $url: String!){ 
+  mutation likeContent($applicationId: String!, $actionId: String!, $url: String!){ 
   
-  likeContent(applicaitonId: $applicaitonId, actionId: $actionId, url: $url) {
+  likeContent(applicationId: $applicationId, actionId: $actionId, url: $url) {
     status
     
   }

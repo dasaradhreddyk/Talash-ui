@@ -48,10 +48,10 @@
                     <div class="w3-container" id="showcase">
 
 
-                        <table> <td colspan="2" style="background-color:rgb(246, 220, 114);">
-                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1200px" height="160px"
+                        <table> <td colspan="2" style="background-color:rgb(14, 120, 60); font-size: x-large;">
+                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1200px" height="140px"
                                         style="border-radius:00%;border:2px solid purple" />
-                                         <b><i>Fast social media search</i></b>
+                                         <b><h3><i>Fast social media search</i></h3></b>
                                           <a *ngIf="auth.isAuthenticated()" [routerLink]='["/profile"]'>
                                         <span class='glyphicon glyphicon-user'></span> <app-profile></app-profile>
                                     </a>
@@ -86,7 +86,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <br>
+                        
 
 
                     </div>
@@ -149,7 +149,7 @@
                             <div *ngIf="type === 'video'">
                                 <my-video [searchword]=searchword></my-video>
                             </div>
-                            a
+                            
                             <div *ngIf="type === 'image'">
                                 <app-image-viewer [searchword]=searchword></app-image-viewer>
                             </div>

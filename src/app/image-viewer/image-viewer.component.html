@@ -1,6 +1,5 @@
 <ul  class="no-bullets">
     <li *ngFor="let item of imageCompleteDetails">
-
       <!-- <div class="myDIV" >&#x1F6C8;</div>   -->
         <img  class="responsive"  [src]="item.url" />
          <details>
@@ -8,6 +7,12 @@
             
               <div  ><br><img height="30" width="30" src="https://static.vecteezy.com/system/resources/previews/000/420/238/original/like-icon-vector-illustration.jpg">{{item.likes}}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button (click)="UpdateLikes(item.url)" class="btn btn-primary"> Like</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <input height="40" width="60" class="btn btn-light" (click)="deleteItem(item.url)" type="image" src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" />
+
+               <!-- <star-rating [rating]="item.rating" [starSize]="20" [readOnly]="true"></star-rating> -->
+              <!-- <mat-star-rating></mat-star-rating> -->
+
               </div>
          </details>
         
