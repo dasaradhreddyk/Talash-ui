@@ -30,6 +30,18 @@ mutation deleteContent($applicationId: String!, $actionId: String!, $url: String
     
   }
 }
+  
+`
+updatedownloadcount = gql`
+
+mutation deleteContent($applicationId: String!, $actionId: String!, $url: String!){ 
+
+  deletecontent(applicationId: $applicationId, actionId: $actionId, url: $url) {
+    status
+    
+  }
+}
+  
 `
  updateLikes  = gql`
   mutation likeContent($applicationId: String!, $actionId: String!, $url: String!){ 

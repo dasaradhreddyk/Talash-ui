@@ -1,0 +1,16 @@
+
+    fieldset {
+        
+        border: 2px solid red;
+        padding-top: 20px;
+        padding-left: 50px;
+        padding-bottom: 20px;
+        margin:50px;
+
+        border-radius: 14px;
+        width: 289px;
+        background-color: whitesmoke;
+        font-size: larger;
+         
+
+    }

@@ -55,7 +55,7 @@ export class TableComponent implements OnInit {
 
     ngOnInit() {
         this.columns = this.atService.getColumns();
-        this.characters = this.atService.getCharacters("rise");
+       // this.characters = this.atService.getCharacters("rise");
       
        //get book marks.
        this.BookMarks = this.atService.getBookmakrs();

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, of  } from 'rxjs';
 
 
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { CHARACTERS } from './mock-data';
 import { CHARACTERS1 } from './mock-data';
 import { BookMarks } from './mock-data';
@@ -24,19 +24,21 @@ export class AdventureTimeService {
     public BookMarks: any[] = [];
     public CHARACTERS1: any[] = [];
     public meetinginfo: any = "";
+      api_url_mongodb: string = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/DBSearch"
+
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.http = http;
-         http.get<WeatherForecast[]>('https://sharegoodthings.azurewebsites.net/v1/users/rise').subscribe
-            (
-                result => {
-                    this.data = result;
-                    console.log(this.data);
-                    this.data.forEach(function (element) {
-                        CHARACTERS.push(element);
-                    });
+        //  http.get<WeatherForecast[]>('https://sharegoodthings.azurewebsites.net/v1/users/rise').subscribe
+        //     (
+        //         result => {
+        //             this.data = result;
+        //             console.log(this.data);
+        //             this.data.forEach(function (element) {
+        //                 CHARACTERS.push(element);
+        //             });
 
-                    CHARACTERS.push(this.data[0]);
-                }, error => console.error(error));
+        //             CHARACTERS.push(this.data[0]);
+        //         }, error => console.error(error));
 
     }
 
@@ -172,6 +174,36 @@ export class AdventureTimeService {
                 product => this.videoids3 = product
             );
     }
+
+    public GetVidoesByCategory(category: string)
+    {
+
+       var url ="https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/DBSearch/Ananymous/Template/category/OR"
+       url = url.replace("category",category);
+
+    
+          return this.http.get<any[]>(url)
+            .pipe(
+                
+                vodeo => this.videoids3 = vodeo
+               // console.log(JSON.stringify( "Advanced search"+this.videoids))
+            );
+    }
+
+     public updateMongoDBFileInfo(fileAdditonalData: any) {
+    {
+      
+       const httpOptions = {
+            headers: new HttpHeaders({'Content-Type': 'application/json'})
+          }
+
+      this.http.post(this.api_url_mongodb, JSON.stringify(fileAdditonalData) , httpOptions).subscribe(result => {
+            
+            
+          });
+        
+    }
+  }
 }
 
 interface WeatherForecast {

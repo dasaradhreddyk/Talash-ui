@@ -72,17 +72,18 @@
                                 </td>
 
 
-                                <td  style="">
+                                <td  style="padding:20px;margin-left:140px">
                                     <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
                                         <button class="btnlogin">Log out </button>
 
                                     </a>
                                 </td>
-                                <td style="width:200px">
+                                <td style="border-width2px;border:darkblue;width: 300px ;align-items: center;padding:20px;padding-left:140px">
                                     <a *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
                                         <button class="btnlogin">Login </button>
 
                                     </a>
+                                    <hr>
                                 </td>
                             </tr>
                         </table>
@@ -146,16 +147,16 @@
 
 
 
-                            <div *ngIf="type === 'video'">
-                                <my-video [searchword]=searchword></my-video>
+                            <div *ngIf="type === 'video' || type === 'advancedsearch'">
+                                <my-video [searchword]=searchword [type]=type ></my-video>
                             </div>
                             
                             <div *ngIf="type === 'image'">
                                 <app-image-viewer [searchword]=searchword></app-image-viewer>
                             </div>
 
-                            <div style='overflow:scroll; width:1200px;height:700px;'
-                                *ngIf="type != 'video' && type != 'image'">
+                            <div  style='overflow:scroll; width:1200px;height:700px;'
+                                *ngIf="type != 'video' && type != 'image' && type != 'advancedsearch'   ">
                                 <app-table [searchword]=searchword [type]="type"></app-table>
                             </div>
                             <div>
@@ -403,20 +404,11 @@
                             <br>
                             <br>
                             <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
+                           
                     </div>
-                    <div class="w3-bar-block">
-
-                        <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Content
-                            Marketing
-                            TOOLS </a>
-                    </div>
+                    
                     <div>
-                        <p>Search Content</p>
+                        <p></p>
                     </div>
                     <div>
                         <app-events (searchword)="childEventClicked($event)"></app-events>
@@ -450,7 +442,7 @@
                             </b>
                         </h4>
                         <a>
-                            <span class='glyphicon glyphicon-log-in'></span><img src="coollogo_com-19047462.png" /> Log
+                            /* <span class='glyphicon glyphicon-log-in'></span><img src="coollogo_com-19047462.png" /> Log */
                             In
                         </a><br />
                         <a [routerLink]='["/profile"]'>

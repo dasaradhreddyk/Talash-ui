@@ -2,6 +2,7 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdventureTimeService } from '../services/adventure-time.service';
+import { filesearchattributesdata } from '../Models/FileAdditionalInfo';
 
 @Component({
     selector: 'my-video',
@@ -13,8 +14,10 @@ export class VideoplayerComponent {
     safeSrc: SafeResourceUrl;
     safeSrc2: SafeResourceUrl[] = [];
     videoids: WeatherForecast1[] = [];
-    @Input() searchword: string="";
-    
+    @Input() searchword: string = "";
+    @Input() type: string = "";
+    fileAdditonalData!: filesearchattributesdata;
+    keywords: string = "";
     items: Array<string>;
     //searchword: string = "";
     data: any[] = [];
@@ -23,31 +26,69 @@ export class VideoplayerComponent {
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk");
 
         this.items = this.atService.getVideodata(this.searchword);
-       this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk"));
+        // this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk"));
 
-        // this.atService.getvideodata1(this.searchword)
-        //     .subscribe((res: any) => {
-        //         this.data = res;
-        //         this.data.forEach(x => console.log(x.name));
-        //         this.data.forEach(x =>this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + x.name)));
-               
-        //     }, (err: any) => {
-        //         console.log(err);
-        //     });
     }
     ngOnChanges(changes: SimpleChanges) {
 
-        this.atService.getvideodata1(this.searchword)
-        .subscribe((res: any) => {
-            this.data = res;
-            this.data.forEach(x => console.log(x.name));
-            this.data.forEach(x =>this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + x.name)));
-           
-        }, (err: any) => {
-            console.log(err);
-        });
-    }
+        //console.log("**** searchword changed to " + this.type);
 
+        if (this.type != 'video' && this.type != 'advancedsearch') return;
+        if (this.type === 'video') {
+            this.atService.getvideodata1(this.searchword)
+                .subscribe((res: any) => {
+                    this.data = res;
+                    this.data.forEach(x => console.log(x.name));
+                    this.data.forEach(x => this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + x.name)));
+
+                }, (err: any) => {
+                    console.log(err);
+                });
+        }
+        else if (this.type === 'advancedsearch') {
+            this.safeSrc2 = [];
+            // console.log(" *******request for video by cateory"+ this.searchword);
+            this.atService.GetVidoesByCategory(this.searchword).subscribe((res: any) => {
+                this.data = res;
+                this.data.forEach(x => {
+                    if (x.fileName != null && x.fileName.includes("youtube")
+                    ) {
+                        console.log("**** video data " + x.fileName);
+
+
+
+                        // if(x.filename != null && x.fileName.includes("youtube")) 
+                        this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl(x.fileName));
+                        // console.log("**** video data " + x.fileName);
+                    }
+                })
+            }, (err: any) => {
+                console.log(err);
+            });
+        }
+        console.log("**** SEARCH data " + JSON.stringify(this.safeSrc2));
+    }
+    UpdateKeywords(event: any) {
+        this.keywords = event.target.value;
+        console.log("keywords updated" + this.keywords);
+    }
+    UpdaeKeyWrods(event: any) {
+        // console.log("keywords"+ this.keywords);
+        // console.log("filename: "+JSON.stringify(event));
+        let filename = event.changingThisBreaksApplicationSecurity;
+        console.log(filename);
+        this.fileAdditonalData = {
+            username: "Anonymous",
+            fileName: filename,
+            keywords: this.keywords.split(','),
+            videourls: this.data.map(x => "https://www.youtube.com/embed/" + x.name),
+            fileCategory: this.searchword,
+            summary: "NA"
+
+
+        };
+        this.atService.updateMongoDBFileInfo(this.fileAdditonalData);
+    }
 }
 interface WeatherForecast1 {
     name: string;

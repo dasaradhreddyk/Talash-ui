@@ -1,15 +1,4 @@
-<style>
-    fieldset {
-        
-        border: 2px solid red;
-        padding: 12px;
-        border-radius: 14px;
-        width: 189px;
-        background-color: whitesmoke;
-         
 
-    }
-</style>
 <div class="container">
 
     <fieldset >
@@ -25,4 +14,9 @@
         </table>
 
         </fieldset>
+        <fieldset>
+            Advanced    search  By keywords, categories:
+            <input type="text" style="width: 150px;"  size="150" width="48"  maxlength="150" value="education,technology" [(ngModel)]="advancedkeywords" />
+            <button class='btn btn-primary' (click)="SearchByKeywords()">Search </button>
+        </fieldset> 
 </div>

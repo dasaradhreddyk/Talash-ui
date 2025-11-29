@@ -19,19 +19,25 @@ export class SearchWordComponent implements OnInit {
     @Output() searchword = new EventEmitter < { searchword: string, type: string }>();
     typeId!: string;
     placeId!: string;
-   
+   advancedkeywords: string="";
     
-    
+    SearchByKeywords() {
+      console.log("advanced search);");
+      this.searchword.emit({ searchword: this.advancedkeywords, type: 'advancedsearch' });
+    }
     sendNotification(placeId: any,type: any) {
       
         this.searchword.emit({ searchword: placeId, type: this.typeId });
     }
-    onClick(event: Event): void {
+    // onClick(event: Event): void {
       
 
-        this.searchword.emit({ searchword: 'rise', type: 'image' });
+    //     this.searchword.emit({ searchword: 'rise', type: 'image' });
        
-    }
+    // }
+    
+    
+    
     ngOnInit() {     
 
 

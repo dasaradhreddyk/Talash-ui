@@ -98,6 +98,22 @@ ngOnInit(): void {
       })
   
   }
+  
+  downloadItem(url: string) {
+this.apollo.mutate({
+        mutation: this.imageViewerService.updatedownloadcount,
+        variables: {
+          applicationId:"",         
+          actionId:"2", // Assuming you have an enum for actions
+           url: url,
+          
+        },
+        refetchQueries: [{
+          query: this.imageViewerService.getBookById,
+        }]
+      }).subscribe();
+    
+  }
 
   deleteItem(url: string) {
 this.apollo.mutate({
