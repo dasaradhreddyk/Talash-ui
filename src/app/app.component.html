@@ -48,43 +48,42 @@
                     <div class="w3-container" id="showcase">
 
 
-                        <table> <td colspan="2" style="background-color:rgb(14, 120, 60); font-size: x-large;">
-                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1200px" height="140px"
+                        <table> 
+                            
+                            <td colspan="2" style="background-color:rgb(14, 120, 60); font-size: x-large;">
+                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1200px" height="100px"
                                         style="border-radius:00%;border:2px solid purple" />
                                          <b><h3><i>Fast social media search</i></h3></b>
                                           <a *ngIf="auth.isAuthenticated()" [routerLink]='["/profile"]'>
                                         <span class='glyphicon glyphicon-user'></span> <app-profile></app-profile>
-                                    </a>
-                                    </td>
-                            <tr>
-                                <td>
-                                    
-                                    </td>
-                                </tr>
-                            <tr>
-                               
-                               
-
-                                <td>
+                                    </a> 
                                     <a *ngIf="auth.isAuthenticated()" [routerLink]='["/profile"]'>
                                         <span class='glyphicon glyphicon-user'></span> <app-profile></app-profile>
                                     </a>
                                 </td>
+                                
 
-
+                                
+                            <tr style="height: 10px;">
+                               
+                               
                                 <td  style="padding:20px;margin-left:140px">
                                     <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
                                         <button class="btnlogin">Log out </button>
 
                                     </a>
                                 </td>
-                                <td style="border-width2px;border:darkblue;width: 300px ;align-items: center;padding:20px;padding-left:140px">
+                                <td style="border-width2px;border:darkblue;width: 200px ;align-items: center;padding:10px;margin-left:140px">
                                     <a *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
                                         <button class="btnlogin">Login </button>
 
                                     </a>
                                     <hr>
                                 </td>
+
+                               
+
+                                
                             </tr>
                         </table>
                         
@@ -466,10 +465,9 @@
 
 
     <!-- Top menu on small screens -->
-    <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding" >
-        <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
-        <span>Company Name</span>
-        <img height="140px" width="1600px" src="https://talashlogs.blob.core.windows.net/other/logo.png" />
+    <header  >
+        /* <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a> */
+        <img height="80px" width="1600px" src="https://talashlogs.blob.core.windows.net/other/logo.png" />
  
     </header>
 

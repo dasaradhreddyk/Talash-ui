@@ -7,14 +7,15 @@ ul{
     -webkit-columns: 3;
     -moz-columns: 3;
     columns: 3;
+    
 }
 
 .responsive {
-    width:90%;height:249;padding-top:16%;position:relative;
+    width:300px;height:249;padding-top:10%;position:relative;
   }
   
   .hide {
-  display: none;
+  display: absolute;
   align-items: center ;
   align-content: center;
   
@@ -26,7 +27,7 @@ ul{
 }
 
 .myDIV:hover + .hide {
-  display: block;
+  display: none;
   color: red;
   transition-duration: 20s;
 }
