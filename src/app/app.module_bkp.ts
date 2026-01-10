@@ -38,7 +38,7 @@ import {  GraphQLModule } from './graphql.module'
         TableRowIncorrectComponent,
         TableRowMixedComponent,
         FileuploadComponent,
-        SearchWordComponent,
+        // SearchWordComponent,
         HomeComponent,        
         NguiInViewComponent,
         VideoplayerComponent,
@@ -62,7 +62,7 @@ import {  GraphQLModule } from './graphql.module'
         FormsModule,
     
         ReactiveFormsModule,
-    
+        SearchWordComponent,
         HttpClientModule,
         RouterModule.forRoot([{
             path: 'mysite/:id',component: AppComponent

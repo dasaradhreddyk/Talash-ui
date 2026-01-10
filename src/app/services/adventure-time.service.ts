@@ -18,6 +18,7 @@ export class AdventureTimeService {
     
     public videoids: any[] = [];
     public videoids3!: Observable<any[]>;
+    public keywordsforvideo: any[] = [];
 
     public videoids1: string[]=[];
     public CHARACTERS: any[] = [];
@@ -190,6 +191,28 @@ export class AdventureTimeService {
             );
     }
 
+    public GetKeywordsforVideoData()
+    {
+
+       var url ="https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI/criteria"  
+        console.log("url for keywords"+ url);
+
+          return this.http.get<any[]>(url)
+            .pipe(
+                
+                vodeo => this.videoids3 = vodeo
+               //console.log(JSON.stringify( "Advanced search"+this.videoids));
+            );         
+       
+    //    this.http.get<any[]>(url)
+    //         .subscribe(
+    //             keywords => {
+    //               this.keywordsforvideo = keywords;
+    //               console.log(JSON.stringify( this.keywordsforvideo));
+    //               return this.keywordsforvideo;
+    //             }
+    //         );
+    }
      public updateMongoDBFileInfo(fileAdditonalData: any) {
     {
       
