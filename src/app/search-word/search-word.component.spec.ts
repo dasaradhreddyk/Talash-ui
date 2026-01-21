@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchWordComponent } from './search-word.component';
+import { CloudData, CloudOptions } from "angular-tag-cloud-module";
+
 
 describe('SearchWordComponent', () => {
   let component: SearchWordComponent;
