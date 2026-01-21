@@ -28,6 +28,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppstoreComponent } from './appstore/appstore.component'
 import { ContentuploadComponent} from './contentupload/contentupload.component'
 import {  GraphQLModule } from './graphql.module'
+import { TagCloudModule } from "angular-tag-cloud-module";
+
 
 
 @NgModule({
@@ -60,7 +62,7 @@ import {  GraphQLModule } from './graphql.module'
 
         BrowserModule,
         FormsModule,
-    
+        TagCloudModule,
         ReactiveFormsModule,
     
         HttpClientModule,

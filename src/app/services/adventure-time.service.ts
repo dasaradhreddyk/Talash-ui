@@ -202,16 +202,24 @@ export class AdventureTimeService {
                 
                 vodeo => this.videoids3 = vodeo
                //console.log(JSON.stringify( "Advanced search"+this.videoids));
-            );         
+            );        
        
-    //    this.http.get<any[]>(url)
-    //         .subscribe(
-    //             keywords => {
-    //               this.keywordsforvideo = keywords;
-    //               console.log(JSON.stringify( this.keywordsforvideo));
-    //               return this.keywordsforvideo;
-    //             }
-    //         );
+   
+    }
+
+       public GetKeywordsAndCountforVideoData()
+    {
+
+       var url ="https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI"  
+        console.log("url for keywords"+ url);
+
+          return this.http.post<any[]>(url,[  "string"])
+            .pipe(
+                
+                vodeo => this.videoids3 = vodeo
+            );        
+       
+   
     }
      public updateMongoDBFileInfo(fileAdditonalData: any) {
     {
