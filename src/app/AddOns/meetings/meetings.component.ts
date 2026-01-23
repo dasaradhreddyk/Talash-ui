@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { AdventureTimeService } from '../services/adventure-time.service';
+import { AdventureTimeService } from '../../Shared/services/adventure-time.service';
 import { forkJoin, of } from 'rxjs';
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '../../Shared/services/auth.service';
 import DyteClient from '@dytesdk/web-core';
 import { DyteMeeting, DyteMenu } from '@dytesdk/angular-ui-kit';
 

@@ -1,6 +1,6 @@
 import { Component, ViewChild} from '@angular/core';
-import { ModalService } from './services/modal.service';
-import { AuthService } from './services/auth.service';
+import { ModalService } from './Shared/services/modal.service';
+import { AuthService } from './Shared/services/auth.service';
 
 import { ShareComponent } from './share/share.component';
 

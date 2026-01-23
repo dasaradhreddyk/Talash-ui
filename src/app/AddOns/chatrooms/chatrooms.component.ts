@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AdventureTimeService } from '../services/adventure-time.service';
+import { AdventureTimeService } from '../../Shared/services/adventure-time.service';
 import { forkJoin } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
 import { Console } from 'console';

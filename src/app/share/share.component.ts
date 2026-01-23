@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AdventureTimeService } from '../services/adventure-time.service';
+import { AdventureTimeService } from '../Shared/services/adventure-time.service';
 import { Observable } from 'rxjs';
 @Component({
     selector: 'app-modal',

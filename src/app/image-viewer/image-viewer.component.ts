@@ -1,13 +1,13 @@
 import { Component ,SimpleChanges,Input, OnInit,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AdventureTimeService } from '../services/adventure-time.service';
+import { AdventureTimeService } from '../Shared/services/adventure-time.service';
 
 import { Apollo } from 'apollo-angular';
 
-import { GET_IMAGES } from './../graphql.queries/graphql.countries.queries';
+import { GET_IMAGES } from '../Shared/graphql.queries/graphql.countries.queries';
 import { ImageViewerService} from './services/imageservice'
 import { stringify } from 'querystring';
 import { DomSanitizer } from "@angular/platform-browser";
-import { AppSignalRService } from '../services/app-signalr.service';
+import { AppSignalRService } from '../Shared/services/app-signalr.service';
 
 
 

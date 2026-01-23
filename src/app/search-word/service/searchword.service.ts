@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { gql } from 'apollo-angular'
 import { SearchWordComponent } from '../search-word.component';
-import { AdventureTimeService } from 'src/app/services/adventure-time.service';
+import { AdventureTimeService } from 'src/app/Shared/services/adventure-time.service';
 
 @Injectable({
     providedIn: 'root'

@@ -1,8 +1,8 @@
 
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { AdventureTimeService } from '../services/adventure-time.service';
-import { filesearchattributesdata } from '../Models/FileAdditionalInfo';
+import { AdventureTimeService } from '../../Shared/services/adventure-time.service';
+import { filesearchattributesdata } from '../../Shared/Models/FileAdditionalInfo';
 
 @Component({
     selector: 'my-video',

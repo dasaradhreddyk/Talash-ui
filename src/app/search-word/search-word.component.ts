@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AdventureTimeService } from '../services/adventure-time.service';
+import { AdventureTimeService } from '../Shared/services/adventure-time.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
