@@ -13,16 +13,19 @@
 
         </table>
 
-        </fieldset>
-        <fieldset>
+        
+        <!-- <fieldset>
             Advanced    search  By keywords, categories:
             <input type="text" style="width: 150px;"  size="150" width="48"  maxlength="150" value="education,technology" [(ngModel)]="advancedkeywords" />
             <button class='btn btn-primary' (click)="SearchByKeywords()">Search </button>
-        </fieldset> 
-</div>
+        </fieldset>  -->
 
 
-<fieldset>
+
+    </fieldset>
+
+    <fieldset>
+    <legend>Search videos by categories and keywords</legend>
 <div class="ng-autocomplete">
   <ng-autocomplete
     [data]="countries"
@@ -48,6 +51,6 @@
      
 </div>
 </fieldset>
-<div style="width: 150px;">
-  <angular-tag-cloud [config]="options" [data]="data"> </angular-tag-cloud>
+<div style="margin:100px">
+  <angular-tag-cloud [config]="options" [data]="tagCloudData"> </angular-tag-cloud>
 </div>

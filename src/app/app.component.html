@@ -42,7 +42,7 @@
     <table>
         <tr>
             <td>
-                <div  style="width:1200px;padding-right: 100px;">
+                <div  style="width:900px;padding-right: 100px;">
 
                     <!-- Header -->
                     <div class="w3-container" id="showcase">
@@ -51,8 +51,8 @@
                         <table> 
                             
                             <td colspan="2" style="background-color:rgb(14, 120, 60); font-size: x-large;">
-                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1200px" height="100px"
-                                        style="border-radius:00%;border:2px solid purple" />
+                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1000px" height="100px"
+                                        style="border-radius:00%;border:0px solid purple" />
                                          <b><h3><i>Fast social media search</i></h3></b>
                                           <a *ngIf="auth.isAuthenticated()" [routerLink]='["/profile"]'>
                                         <span class='glyphicon glyphicon-user'></span> <app-profile></app-profile>
@@ -106,7 +106,6 @@
 
                             </td>
                             <td>
-                                <button class="bigbuttons1">Buy / Sell Video</button>
 
                             </td>
                         </tr>
@@ -153,7 +152,7 @@
                                 <app-image-viewer [searchword]=searchword></app-image-viewer>
                             </div>
 
-                            <div  style='overflow:scroll; width:1200px;height:700px;'
+                            <div  style='overflow:scroll; width:900px;height:700px;'
                                 *ngIf="type != 'video' && type != 'image' && type != 'advancedsearch'   ">
                                 <app-table [searchword]=searchword [type]="type"></app-table>
                             </div>
@@ -396,8 +395,8 @@
                 <nav style="background-color: white;padding: 5px"
                 >
                     
-                    <div>
-                         <img width=380px height=150px
+                    <div style="padding-left: 120px;">
+                         <img width=280px height=100px
                             src="https://giffiles.alphacoders.com/212/21215.gif" /> 
                             <br>
                             <br>
@@ -466,7 +465,7 @@
     <!-- Top menu on small screens -->
     <header  >
         /* <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a> */
-        <img height="80px" width="1600px" src="https://talashlogs.blob.core.windows.net/other/logo.png" />
+        <img height="80px" width="1200px" src="https://talashlogs.blob.core.windows.net/other/logo.png" />
  
     </header>
 
