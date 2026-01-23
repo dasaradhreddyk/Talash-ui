@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import {Observable, forkJoin, merge, reduce } from 'rxjs';
 import { Router, ActivatedRoute, Params, ParamMap, RouterStateSnapshot, NavigationEnd  } from '@angular/router';
-import { AdventureTimeService } from '../services/adventure-time.service';
+import { AdventureTimeService } from '../../../Shared/services/adventure-time.service';
 
 @Component({
   selector: 'app-table',

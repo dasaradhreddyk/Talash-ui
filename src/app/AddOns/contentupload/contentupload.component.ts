@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { AuthService } from '../Shared/services/auth.service';
+import { AuthService } from '../../Shared/services/auth.service';
 import { resourceLimits } from 'worker_threads';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser'
 import { Interface } from 'readline';

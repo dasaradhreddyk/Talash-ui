@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable, of  } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
@@ -15,32 +15,21 @@ export class AdventureTimeService {
     public http: HttpClient;
     public data: WeatherForecast[] = [];
     public bookmarkdata: BookMarkData[] = [];
-    
+
     public videoids: any[] = [];
     public videoids3!: Observable<any[]>;
     public keywordsforvideo: any[] = [];
 
-    public videoids1: string[]=[];
+    public videoids1: string[] = [];
     public CHARACTERS: any[] = [];
     public BookMarks: any[] = [];
     public CHARACTERS1: any[] = [];
     public meetinginfo: any = "";
-      api_url_mongodb: string = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/DBSearch"
+    api_url_mongodb: string = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/DBSearch"
 
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.http = http;
-        //  http.get<WeatherForecast[]>('https://sharegoodthings.azurewebsites.net/v1/users/rise').subscribe
-        //     (
-        //         result => {
-        //             this.data = result;
-        //             console.log(this.data);
-        //             this.data.forEach(function (element) {
-        //                 CHARACTERS.push(element);
-        //             });
-
-        //             CHARACTERS.push(this.data[0]);
-        //         }, error => console.error(error));
-
+        
     }
 
     getCharacters(input: string): Observable<WeatherForecast[]> {
@@ -75,7 +64,7 @@ export class AdventureTimeService {
                 result => {
                     this.BookMarks = <BookMarkData[]>result;
                     BookMarks.push(this.bookmarkdata[0]);
-                     }, error => console.error(error));
+                }, error => console.error(error));
 
 
         return of(this.BookMarks);
@@ -102,7 +91,7 @@ export class AdventureTimeService {
             (
                 result => {
                     this.data = result;
-                   this.data.forEach(function (element) {
+                    this.data.forEach(function (element) {
                         CHARACTERS1.push(element);
                     });
 
@@ -142,32 +131,32 @@ export class AdventureTimeService {
     }
 
 
-    createMeeting(userid: string, time : string) :Observable<string> {
+    createMeeting(userid: string, time: string): Observable<string> {
         //var url = "https://sharegoodthings.azurewebsites.net/weatherforecast/GetVideolist?input=" + "searchword";
-       // var url = "https://talashvideo.azurewebsites.net/v1/createmeeting/?userid=dasradh&schedule=today" ;
-        var url = "https://talashvideo.azurewebsites.net/v1/createmeetingandsaveinfo/?userid=" + userid +"&schedule="+time;
+        // var url = "https://talashvideo.azurewebsites.net/v1/createmeeting/?userid=dasradh&schedule=today" ;
+        var url = "https://talashvideo.azurewebsites.net/v1/createmeetingandsaveinfo/?userid=" + userid + "&schedule=" + time;
 
 
-         this.http.post<Observable<any>>(url,{"userid":userid,"schedule":time}) .subscribe(
+        this.http.post<Observable<any>>(url, { "userid": userid, "schedule": time }).subscribe(
 
             result => {
-              // console.log("service"+ result);
-               var k = JSON.parse(JSON.stringify(result));
-               var kkk:meetingdata = JSON.parse(k)       
-               this.meetinginfo = kkk;    
+                // console.log("service"+ result);
+                var k = JSON.parse(JSON.stringify(result));
+                var kkk: meetingdata = JSON.parse(k)
+                this.meetinginfo = kkk;
             }
-         )             
-            
-          //  console.log("test" + JSON.stringify(this.meetinginfo));
-            return of(JSON.stringify(this.meetinginfo));
-           
-            
+        )
+
+        //  console.log("test" + JSON.stringify(this.meetinginfo));
+        return of(JSON.stringify(this.meetinginfo));
+
+
     }
 
 
     getImagedata(searchword: string): Observable<any[]> {
-    
-        var url = "https://talashimages-c6bzfxfzezbzhwdv.australiasoutheast-01.azurewebsites.net/v1/image/" + searchword ;
+
+        var url = "https://talashimages-c6bzfxfzezbzhwdv.australiasoutheast-01.azurewebsites.net/v1/image/" + searchword;
 
 
         return this.http.get<any[]>(url)
@@ -176,94 +165,91 @@ export class AdventureTimeService {
             );
     }
 
-    public GetVidoesByCategory(category: string)
-    {
+    public GetVidoesByCategory(category: string) {
 
-       var url ="https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/DBSearch/Ananymous/Template/category/OR"
-       url = url.replace("category",category);
+        var url = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/DBSearch/Ananymous/Template/category/OR"
+        url = url.replace("category", category);
 
-    
-          return this.http.get<any[]>(url)
+
+        return this.http.get<any[]>(url)
             .pipe(
-                
+
                 vodeo => this.videoids3 = vodeo
-               // console.log(JSON.stringify( "Advanced search"+this.videoids))
+                // console.log(JSON.stringify( "Advanced search"+this.videoids))
             );
     }
 
-    public GetKeywordsforVideoData()
-    {
+    public GetKeywordsforVideoData() {
 
-       var url ="https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI/criteria"  
-        console.log("url for keywords"+ url);
+        var url = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI/criteria"
+        console.log("url for keywords" + url);
 
-          return this.http.get<any[]>(url)
+        return this.http.get<any[]>(url)
             .pipe(
-                
+
                 vodeo => this.videoids3 = vodeo
-               //console.log(JSON.stringify( "Advanced search"+this.videoids));
-            );        
-       
-   
+                //console.log(JSON.stringify( "Advanced search"+this.videoids));
+            );
+
+
     }
 
-       public GetKeywordsAndCountforVideoData()
-    {
+    public GetKeywordsAndCountforVideoData() {
 
-       var url ="https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI"  
-        console.log("url for keywords"+ url);
+        var url = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI"
+        console.log("url for keywords" + url);
 
-          return this.http.get<any[]>(url)
+        return this.http.get<any[]>(url)
             .pipe(
-                
-                vodeo => this.videoids3 = vodeo
-            );        
-       
-   
-    }
-     public updateMongoDBFileInfo(fileAdditonalData: any) {
-    {
-      
-       const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'})
-          }
 
-      this.http.post(this.api_url_mongodb, JSON.stringify(fileAdditonalData) , httpOptions).subscribe(result => {
-            
-            
-          });
-        
+                vodeo => this.videoids3 = vodeo
+            );
+
+
     }
-  }
+    public updateMongoDBFileInfo(fileAdditonalData: any) {
+        {
+
+            const httpOptions = {
+                headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+            }
+
+            this.http.post(this.api_url_mongodb, JSON.stringify(fileAdditonalData), httpOptions).subscribe(result => {
+
+
+            });
+
+        }
+    }
 }
 
 interface WeatherForecast {
-    age: string ;
+    age: string;
     name: string;
     species: number;
     occupation: string;
-   
-    
+
+
 }
 interface BookMarkData {
-    url: string ;
+    url: string;
     type: string;
-    info1:string;
-    info2:string;
-    name:string;
+    info1: string;
+    info2: string;
+    name: string;
     age: string;
-    species:string;
-    occupation:string;   
-   
-    
+    species: string;
+    occupation: string;
+
+
 }
 
 interface WeatherForecast1 {
     name: string;
-   
+
 }
 
 interface meetingdata {
     UserNme: string;
     rooms: any;
-  }
+}

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AdventureTimeService } from '../services/adventure-time.service';
+import { AdventureTimeService } from '../../../Shared/services/adventure-time.service';
 
 @Component({
   selector: 'app-table-row-mixed',

@@ -2,7 +2,7 @@ import { Component, ViewChild} from '@angular/core';
 import { ModalService } from './Shared/services/modal.service';
 import { AuthService } from './Shared/services/auth.service';
 
-import { ShareComponent } from './share/share.component';
+import { ShareComponent } from './POC-Components/share/share.component';
 
 @Component({
     selector: 'app-root',
