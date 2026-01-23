@@ -213,7 +213,7 @@ export class AdventureTimeService {
        var url ="https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI"  
         console.log("url for keywords"+ url);
 
-          return this.http.post<any[]>(url,[  "string"])
+          return this.http.get<any[]>(url)
             .pipe(
                 
                 vodeo => this.videoids3 = vodeo

@@ -9,19 +9,24 @@
     </ol>
 <p *ngFor="let ids of videoids; last as isLast">test{{ids}}
 </p>
-<table style="margin:50px;border:3px;text-decoration-thickness: 2;background-color: rgb(237, 239, 239);"> 
+<table style="margin:10px;border:0px;text-decoration-thickness: 2;background-color: rgb(237, 239, 239);"> 
     
 
 <p *ngFor="let ss of safeSrc2; last as isLast">
 <tr>
         <td>
+ <div style="padding: 50px;">
 
+    <iframe  [src]="ss" width="560" height="415" frameborder="0" webkitallowfullscreen mozallowfullscreen
+            allowfullscreen> </iframe>
+            </div>
+            
         </td>
         <td style="padding:1oopx;vertical-align: middle;font-size: large;color:brick  ;">
-            <span><div style="border:2px">    Download  <a href="https://www.socialplug.io/free-tools/youtube-video-downloader">You tube downloder</a></div>
+            <span><div style="border:0px">    Download  <a href="https://www.socialplug.io/free-tools/youtube-video-downloader">You tube downloder</a></div>
 
 
-                <div style="border:2px">  Share : facebook, twitter , linked in</div>
+                <div style="border:0px">  Share : facebook, twitter , linked in</div>
 
 
                 </span>
@@ -37,12 +42,7 @@
           please contact sales</div>
           </details>
         </td>
-    <div style="padding: 50px;">
-
-    <iframe  [src]="ss" width="560" height="415" frameborder="2" webkitallowfullscreen mozallowfullscreen
-            allowfullscreen> </iframe>
-            </div>
-            
+   
 </tr>
 
 
