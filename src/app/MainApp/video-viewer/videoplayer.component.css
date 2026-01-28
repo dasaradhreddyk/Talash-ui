@@ -1,6 +1,6 @@
 /* default styling. Nothing to do with freexing first row and column */
 main {display: flex;}
-main > * {border: 0px solid;}
+main > * {border: 1px solid;}
 table {border-collapse: collapse; font-family: helvetica}
 td, th {border:  1px solid;
       padding: 10px;
@@ -55,7 +55,7 @@ tbody {
 tr > :first-child {
   position: -webkit-sticky;
   position: sticky; 
-  background: hsl(180, 55%, 90%);
+  background: hsl(217, 45%, 92%);
   left: 0; 
 }
 /* don't do this */

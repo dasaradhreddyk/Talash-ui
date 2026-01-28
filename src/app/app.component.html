@@ -12,7 +12,7 @@
     h3,
     h4,
     h5 {
-        font-family: Calibri;
+        font-family: helvetica, sans-serif;
         box-shadow: 0 1px 4px 0 #9b9b9b;
         background-color: #fbf0d7;
         font-size: calc(60% + 0.8vmin);
@@ -48,10 +48,10 @@
                     <div class="w3-container" id="showcase">
 
 
-                        <table> 
+                        <table style="padding: 100px;"> 
                             
-                            <td colspan="2" style="background-color:rgb(14, 120, 60); font-size: x-large;">
-                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1000px" height="100px"
+                            <td colspan="2" style="background-color:rgb(249, 252, 250); font-size: x-large;">
+                                    <img src="https://talashlogs.blob.core.windows.net/other/logo.png" width="1020px" height="100px"
                                         style="border-radius:00%;border:0px solid purple" />
                                          <b><h3><i>Fast social media search</i></h3></b>
                                           <a *ngIf="auth.isAuthenticated()" [routerLink]='["/profile"]'>
@@ -64,26 +64,7 @@
                                 
 
                                 
-                            <tr style="height: 10px;">
-                               
-                                <td  style="padding:20px;margin-left:140px">
-                                    <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
-                                        <button class="btnlogin">Log out </button>
-
-                                    </a>
-                                </td>
-                                <td style="border-width2px;border:darkblue;width: 200px ;align-items: center;padding:10px;margin-left:140px">
-                                    <a *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
-                                        <button class="btnlogin">Login </button>
-
-                                    </a>
-                                    <hr>
-                                </td>
-
-                               
-
-                                
-                            </tr>
+                            
                         </table>
                         
 
@@ -140,7 +121,7 @@
 
 
                         <br>
-                        <div class="w3-row-padding">
+                        <div  class="w3-row-padding">
 
 
 
@@ -407,6 +388,27 @@
                     <div>
                         <p></p>
                     </div>
+                    <table>
+                        <tr style="height: 10px;margin-left:340px;align-items: center;">
+                               
+                                <td  style="padding-left:200px;margin-left:140px">
+                                    <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
+                                        <button class="btnlogin">Log out </button>
+
+                                    </a>
+                                </td>
+                                <td style="border-width2px;border:darkblue;width: 200px ;align-items: center;padding:10px;margin-left:140px">
+                                    <a *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
+                                        <button class="btnlogin">Login </button>
+
+                                    </a>
+                                </td>
+
+                               
+
+                                
+                            </tr>
+                        </table>
                     <div>
                         <app-events (searchword)="childEventClicked($event)"></app-events>
 

@@ -1,21 +1,17 @@
 
-    fieldset {
-        
-        border: 2px solid red;
-        padding-top: 20px;
-        padding-left: 20px;
-        padding-bottom: 20px;
-        margin-left:100px;
-                margin-bottom:20px;
-
-
-        border-radius: 14px;
-        width: 299px;
-        background-color: whitesmoke;
-        font-size: larger;
-         
-
-    }
+  fieldset {
+border: 1px solid #CCA383;
+width: 57%;
+background: #FFE8EF;
+padding: 3px;
+margin: 50px;
+padding: 30px;
+}
+fieldset legend {
+background: #f8f5f3;
+padding: 6px;
+font-weight: normal;
+}
 
     .ng-autocomplete {
     width: 200px;

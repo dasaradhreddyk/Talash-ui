@@ -48,7 +48,9 @@
 .w3-cell-row:before, .w3-cell-row:after, .w3-clear:after, .w3-clear:before, .w3-bar:before, .w3-bar:after {
     content: "";
     display: table;
-    clear: both
+    clear: both;
+    padding: 50px;
+
 }
 .w3-sidebar {
      height: 150%;
@@ -178,8 +180,8 @@ details {
             cursor: pointer;
             border: 1px solid #3498db;
             background-color: #3c07071a;
-            height: 40px;
-            width: 160px;
+            height: 35px;
+            width: 200px;
             color:black;
             font-size: 1.5em;
             box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);

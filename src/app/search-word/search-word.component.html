@@ -29,8 +29,8 @@
 <div class="ng-autocomplete">
   <ng-autocomplete
     [data]="countries"
-    [searchKeyword]="keyword"
-    placeholder="Enter the Country Name"
+    [searchKeyword]="keyword" 
+    placeholder="Enter the keyword / tag Name"
     (selected)='selectEvent($event)'
     (inputChanged)='onChangeSearch($event)'
     (inputFocused)='onFocused($event)'
