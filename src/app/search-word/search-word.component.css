@@ -16,3 +16,20 @@ font-weight: normal;
     .ng-autocomplete {
     width: 200px;
 }
+.custom-button {
+background-color: #e0e8e6; /* Bright green for attention */
+color: #da3c3c; /* White text for contrast */
+border: none; /* Clean edges */
+padding: 6px 12px; /* Comfortable clickable area */
+font-size: 16px; /* Easy-to-read size */
+font-weight: bold; /* Stands out visually */
+border-radius: 8px; /* Friendly rounded corners */
+cursor: pointer; /* Indicates interactivity */
+transition: all 0.3s ease; /* Smooth animation for hover effects */
+}
+
+.custom-button:hover {
+background-color: #16a085; /* Darker green for emphasis */
+box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); /* Adds depth and realism */
+transform: scale(1.05); /* Slight enlargement for an engaging hover effect */
+}
