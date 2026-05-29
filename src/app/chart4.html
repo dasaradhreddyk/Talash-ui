@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 Documents by Likes</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+        .header {
+            padding: 28px 32px 22px;
+            background: #4e5ede;
+            color: #fff;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .header p {
+            margin: 8px 0 0;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 24px 32px 32px;
+        }
+        .status {
+            margin-bottom: 18px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .status.loading { background: #e3f2fd; color: #0d47a1; }
+        .status.success { background: #e8f5e9; color: #1b5e20; }
+        .status.error { background: #ffebee; color: #b71c1c; }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .actions button,
+        .actions select {
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .actions button {
+            background: #667eea;
+            color: #fff;
+        }
+        .actions button:hover { background: #5568d7; }
+        .actions select {
+            border: 1px solid #ced4da;
+            background: #fff;
+            color: #333;
+        }
+        .chart-box {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            margin-bottom: 26px;
+        }
+        .table-box {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background: #f4f6ff;
+            color: #344050;
+            font-weight: 700;
+        }
+        tr:nth-child(even) { background: #fafbff; }
+        .small-note {
+            margin-top: 10px;
+            color: #616161;
+            font-size: 14px;
+        }
+        @media (max-width: 720px) {
+            .actions { flex-direction: column; align-items: stretch; }
+            .actions button, .actions select { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Top 10 Documents by Likes</h1>
+            <p>Data sourced from the Flask API endpoint <code>/api/top_10</code>.</p>
+        </div>
+        <div class="content">
+            <div id="status" class="status loading">Loading data from API...</div>
+            <div class="actions">
+                <button type="button" onclick="refreshData()">Refresh Data</button>
+                <label for="chartType">Chart type:</label>
+                <select id="chartType" onchange="changeChartType()">
+                    <option value="bar">Bar</option>
+                    <option value="line">Line</option>
+                    <option value="pie">Pie</option>
+                    <option value="doughnut">Doughnut</option>
+                </select>
+                <button type="button" onclick="toggleTable()">Show/Hide Table</button>
+            </div>
+            <div class="chart-box">
+                <canvas id="top10Chart"></canvas>
+            </div>
+            <div class="table-box" id="tableContainer" style="display:none;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Document ID</th>
+                            <th>Filename</th>
+                            <th>Likes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <p class="small-note">Toggle the table to view raw data.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chart = null;
+        let chartData = [];
+
+        function refreshData() {
+            $('#status').removeClass('success error').addClass('loading').text('Loading data from API...');
+            $.ajax({
+                url: 'http://localhost:5000/api/top_10',
+                method: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    chartData = Array.isArray(response) ? response : [];
+                    $('#status').removeClass('loading error').addClass('success').text('Data loaded successfully');
+                    renderChart();
+                    renderTable();
+                },
+                error: function(xhr, status, error) {
+                    $('#status').removeClass('loading success').addClass('error').text('Error loading data: ' + error);
+                    console.error('API request failed:', status, error);
+                }
+            });
+        }
+
+        function renderChart() {
+            if (!chartData.length) {
+                return;
+            }
+
+            const labels = chartData.map((item, index) => 'Rank ' + (index + 1));
+            const values = chartData.map(item => item.likes);
+            const ids = chartData.map(item => item.id);
+            const chartType = document.getElementById('chartType').value;
+            const ctx = document.getElementById('top10Chart').getContext('2d');
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: chartType,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Likes',
+                        data: values,
+                        backgroundColor: [
+                            '#4e5ede', '#36a2eb', '#ff6384', '#ff9f40', '#4bc0c0',
+                            '#9966ff', '#c9cbcf', '#ffcd56', '#8bc34a', '#f06292'
+                        ],
+                        borderColor: '#3f51b5',
+                        borderWidth: chartType === 'bar' || chartType === 'line' ? 2 : 0,
+                        fill: chartType === 'line'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: chartType !== 'bar' && chartType !== 'line',
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Top 10 Documents by Likes',
+                            font: { size: 18 }
+                        },
+                        tooltip: {
+                            enabled: false,
+                            external: function(context) {
+                                // Tooltip Element
+                                let tooltipEl = document.getElementById('chartjs-tooltip');
+
+                                // Create element on first render
+                                if (!tooltipEl) {
+                                    tooltipEl = document.createElement('div');
+                                    tooltipEl.id = 'chartjs-tooltip';
+                                    tooltipEl.innerHTML = '<table></table>';
+                                    document.body.appendChild(tooltipEl);
+                                }
+
+                                // Hide if no tooltip
+                                const tooltipModel = context.tooltip;
+                                if (tooltipModel.opacity === 0) {
+                                    tooltipEl.style.opacity = 0;
+                                    return;
+                                }
+
+                                // Set Text
+                                if (tooltipModel.body) {
+                                    const idx = tooltipModel.dataPoints[0].dataIndex;
+                                    const item = chartData[idx];
+                                    const fileName = item.fileName || item.id;
+
+                                    const tableRoot = tooltipEl.querySelector('table');
+                                    tableRoot.innerHTML = `
+                                        <tr><td colspan="2" style="text-align: center; font-weight: bold; padding-bottom: 8px;">${fileName}</td></tr>
+                                        <tr><td style="padding-right: 8px;">Likes:</td><td style="font-weight: bold;">${item.likes}</td></tr>
+                                        <tr><td colspan="2" style="text-align: center; padding-top: 8px;">
+                                            <img src="${fileName}" alt="${fileName}" style="max-width: 100px; max-height: 100px; border-radius: 4px;" onerror="this.style.display='none'">
+                                        </td></tr>
+                                    `;
+                                }
+
+                                const position = context.chart.canvas.getBoundingClientRect();
+
+                                // Display, position, and set styles for font
+                                tooltipEl.style.opacity = 1;
+                                tooltipEl.style.position = 'absolute';
+                                tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
+                                tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY + 'px';
+                                tooltipEl.style.fontFamily = tooltipModel.options.bodyFont.family;
+                                tooltipEl.style.fontSize = tooltipModel.options.bodyFont.size + 'px';
+                                tooltipEl.style.fontStyle = tooltipModel.options.bodyFont.style;
+                                tooltipEl.style.padding = tooltipModel.options.padding + 'px ' + tooltipModel.options.padding + 'px';
+                                tooltipEl.style.pointerEvents = 'none';
+                                tooltipEl.style.background = 'rgba(0, 0, 0, 0.8)';
+                                tooltipEl.style.color = 'white';
+                                tooltipEl.style.borderRadius = '6px';
+                                tooltipEl.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3)';
+                            }
+                        }
+                    },
+                    scales: chartType === 'pie' || chartType === 'doughnut' ? {} : {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Document Rank'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Likes'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderTable() {
+            const body = $('#tableBody');
+            body.empty();
+            if (!chartData.length) {
+                body.append('<tr><td colspan="4" style="padding:16px;">No data available</td></tr>');
+                return;
+            }
+            chartData.forEach((item, index) => {
+                const fileName = item.fileName || item.id;
+                body.append(`
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td style="word-break: break-word;">${item.id}</td>
+                        <td style="word-break: break-word;">
+                            <img src="${fileName}" alt="${fileName}" style="max-width: 50px; max-height: 50px; border-radius: 4px; margin-right: 8px;" onerror="this.style.display='none'">
+                            ${fileName}
+                        </td>
+                        <td>${item.likes}</td>
+                    </tr>
+                `);
+            });
+        }
+
+        function changeChartType() {
+            renderChart();
+        }
+
+        function toggleTable() {
+            $('#tableContainer').toggle();
+        }
+
+        $(document).ready(function() {
+            refreshData();
+        });
+    </script>
+</body>
+</html>

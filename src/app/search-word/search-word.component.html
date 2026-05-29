@@ -2,14 +2,22 @@
 <div class="container">
   <fieldset >
     I want to see more :<br>
-    <Button class="custom-button"> Fashion</Button>
-    <Button class="custom-button"> Sports</Button>
-    <Button class="custom-button"> Pets</Button>
-        <Button class="custom-button"> Cars</Button>
-        <Button class="custom-button"> Arts</Button>
-        <Button class="custom-button"> Trends</Button>
+    <Button class="custom-button" (click)="sendNotification('fashion', 'image')"> Fashion</Button>
+    <Button class="custom-button" (click)="sendNotification('village', 'image')"> Village</Button>
+    <Button class="custom-button" (click)="sendNotification('pets', 'image')"> Pets</Button>
+        <Button class="custom-button" (click)="sendNotification('luxury', 'image')"> luxury</Button>
+        <Button class="custom-button" (click)="sendNotification('art', 'image')"> Arts</Button>
+        <Button class="custom-button" (click)="sendNotification('trends', 'image')  "> Trends</Button>
+        <Button class="custom-button" (click)="sendNotification('posters', 'image')  "> Posters</Button>
    
-
+     <hr>
+     I want to see more Video 
+       <Button class="custom-button" > Latest Ads</Button>
+        <Button class="custom-button" > Hollywood </Button>
+        <Button class="custom-button" > health </Button> <br>
+        <input type="text" width="200px"/>
+        <Button class="custom-button1" > Add your Choice </Button>
+   
   </fieldset>
 
     <fieldset >

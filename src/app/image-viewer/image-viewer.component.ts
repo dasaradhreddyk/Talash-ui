@@ -26,6 +26,8 @@ export class ImageViewerComponent implements OnInit {
   data: any[] = [];
   //searchword: string = "";
   @Input() searchword: string="";
+  searchwords1: string="landing-ads";
+  type: string="video";
   imageList: any[] = [];
   imageCompleteDetails: any[] = [];
   loading : boolean = true;
@@ -87,7 +89,7 @@ ngOnInit(): void {
       //  console.log(JSON.stringify(this.data))
          this.data.forEach(x => { 
         //  console.log(x.url);
-          this.imageList.push(x.url)
+          //this.imageList.push(x.url)
           let imageData: imagedata = {
             url: x.url,likes: x.likes
           };
@@ -163,9 +165,20 @@ sendMessage(message: string): void {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    
+    console.log("search word in image viewer &&&&&&&&&&&&&&&" + this.searchword);
+    let query = this.imageViewerService.getBookById1;
+     if(this.searchword == "" || this.searchword == "Pets" || this.searchword == "Fashion"
+       || this.searchword == "Sports")
+    {
+        
+      this.searchword = "nature1";
+
       this.apollo.watchQuery({
-        query: this.imageViewerService.getBookById,   fetchPolicy: 'no-cache'     
+        query: this.imageViewerService.getBookById1,  
+        variables: {
+          category: this.searchword || "nature1", // Assign a default value if searchword is empty
+        },
+        fetchPolicy: 'no-cache'     
   
       }).valueChanges.subscribe((res:any)=>{
        // console.log("Changes detected" + JSON.stringify(res.data.images)  );
@@ -175,7 +188,7 @@ sendMessage(message: string): void {
          
         this.data.forEach(x => { 
         //  console.log(x.url);
-          this.imageList.push(x.url)
+       //   this.imageList.push(x.url)
           let imageData: imagedata = {
             url: x.url,likes: x.likes
           };
@@ -184,8 +197,39 @@ sendMessage(message: string): void {
         });       
       
       })
+    }
+      else
+      {
+        
+      this.apollo.watchQuery({
+        query: query,
+        variables: {
+          category: this.searchword || "nature1", // Assign a default value if searchword is empty
+        },
+        fetchPolicy: 'no-cache'     
+  
+      }).valueChanges.subscribe((res:any)=>{
+        
+        this.data = res.data.imagesByCategory;
+        console.log("Changes detected" + JSON.stringify(this.data)  );
+       
+         console.log("Changes detected" + JSON.stringify(res)  );
+        this.data.forEach(x => { 
+      
+          let imageData: imagedata = {
+            url: x.url,likes: x.likes
+          };
+          console.log("new Image Data: " + JSON.stringify(imageData));
+          this.imageCompleteDetails.push(imageData);
+          this.imageCompleteDetails.reverse(); // Reverse the array to show the latest images first
+        
+        });       
+      
+      })
+
+      }
      // console.log("Image List: " + JSON.stringify(this.imageList));
-      console.log("Image Complete Details: " + JSON.stringify(this.imageCompleteDetails));  
+      //console.log("Image Complete Details: " + JSON.stringify(this.imageCompleteDetails));  
   }
   imageURL(url :any) {
    // console.log(this.sanitizer.bypassSecurityTrustUrl(url));

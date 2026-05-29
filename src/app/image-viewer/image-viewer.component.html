@@ -1,8 +1,12 @@
+ <div   style="height:250px" >
+      <my-video [searchword]="searchwords1" [landing]="true" [type]="type"></my-video>                          
+ </div>                      
+  <br><br><br><br><br><br><br>
 <ul  class="no-bullets">
     <li *ngFor="let item of imageCompleteDetails">
       <!-- <div class="myDIV" >&#x1F6C8;</div>   -->
         <img  class="responsive"  [src]="item.url" />
-         <details style="background-color: rgb(209, 212, 245);width:90%;"> 
+         <details style="background-color: rgb(209, 212, 245);width:10  0%;"> 
             <summary></summary>
             
               <div  ><br><img height="30" width="30" src="https://static.vecteezy.com/system/resources/previews/000/420/238/original/like-icon-vector-illustration.jpg">{{item.likes}}

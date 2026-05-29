@@ -3,15 +3,16 @@ main {display: flex;}
 main > * {border: 1px solid;}
 table {border-collapse: collapse; font-family: helvetica}
 td, th {border:  1px solid;
-      padding: 10px;
+      max-height: 229px;
       min-width: 200px;
+      padding-left:34px;
       background: white;
       box-sizing: border-box;
       text-align: left;
 }
 .table-container {
   position: relative;
-  max-height:  300px;
+  max-height:  200px;
   width: 500px;
   overflow: scroll;
 }

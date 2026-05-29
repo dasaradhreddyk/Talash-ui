@@ -1,5 +1,5 @@
 
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, input, Input, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdventureTimeService } from '../../Shared/services/adventure-time.service';
 import { filesearchattributesdata } from '../../Shared/Models/FileAdditionalInfo';
@@ -16,6 +16,7 @@ export class VideoplayerComponent {
     videoids: WeatherForecast1[] = [];
     @Input() searchword: string = "";
     @Input() type: string = "";
+    @Input() landing: boolean = false;
     fileAdditonalData!: filesearchattributesdata;
     keywords: string = "";
     items: Array<string>;
@@ -39,6 +40,10 @@ export class VideoplayerComponent {
                 .subscribe((res: any) => {
                     this.data = res;
                     this.data.forEach(x => console.log(x.name));
+                    if(this.landing) {
+                        this.safeSrc = this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + this.data[0].name));
+                    }
+                    else
                     this.data.forEach(x => this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + x.name)));
 
                 }, (err: any) => {

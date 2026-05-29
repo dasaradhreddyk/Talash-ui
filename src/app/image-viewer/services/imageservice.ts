@@ -9,7 +9,15 @@ export class ImageViewerService {
   
   constructor() { }
 
-  
+  getBookById1 = gql`
+    query getBookById1($category: String!) {
+      imagesByCategory(category: $category , limit: 100) {
+        url
+        likes
+      }
+    }
+  `
+
   getBookById = gql`
 
 query getBookByID{

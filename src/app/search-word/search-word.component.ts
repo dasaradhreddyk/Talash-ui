@@ -102,11 +102,11 @@ export class SearchWordComponent implements OnInit {
     console.log("advanced search KKK);" + this.advancedkeywords);
     this.searchword.emit({ searchword: this.advancedkeywords, type: 'advancedsearch' });
   }
-  sendNotification(placeId: any, type: any) {
+  sendNotification(placeId: any, typeId: any) {
 
-    this.searchword.emit({ searchword: placeId, type: this.typeId });
+    this.searchword.emit({ searchword: placeId, type: typeId });
   }
-
+  
   selectEvent(item: any) {
     console.log(JSON.stringify(item));
     this.advancedkeywords = item.id;

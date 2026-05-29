@@ -20,8 +20,19 @@ font-weight: normal;
 background-color: #e0e8e6; /* Bright green for attention */
 color: #da3c3c; /* White text for contrast */
 border: none; /* Clean edges */
-padding: 6px 12px; /* Comfortable clickable area */
-font-size: 16px; /* Easy-to-read size */
+padding: 4px 10px; /* Comfortable clickable area */
+font-size: 14px; /* Easy-to-read size */
+font-weight: bold; /* Stands out visually */
+border-radius: 8px; /* Friendly rounded corners */
+cursor: pointer; /* Indicates interactivity */
+transition: all 0.3s ease; /* Smooth animation for hover effects */
+}
+.custom-button1 {
+background-color: #f3c0cf; /* Bright green for attention */
+color: #6b3cda; /* White text for contrast */
+border: none; /* Clean edges */
+padding: 4px 10px; /* Comfortable clickable area */
+font-size: 14px; /* Easy-to-read size */
 font-weight: bold; /* Stands out visually */
 border-radius: 8px; /* Friendly rounded corners */
 cursor: pointer; /* Indicates interactivity */
