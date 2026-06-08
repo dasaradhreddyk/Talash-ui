@@ -1,6 +1,7 @@
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Shared/services/auth.service';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-blobupload',
@@ -22,6 +23,7 @@ export class BlobuploadComponent implements OnInit {
   public isDisabled: boolean = true;
   showAdvancedUpload :boolean = false;
 
+  userid :string="Ananymous";
   constructor(private http: HttpClient, public auth: AuthService) { }
 
   ngOnInit(): void {
@@ -32,21 +34,21 @@ export class BlobuploadComponent implements OnInit {
 
     //API: http://localhost:4000/api/BlobStorage/ListFilesByApplication?userid=ananymous&applicaiton=videosearch
 
-    let userid = "Ananymous";
+    this.userid = "Ananymous";
     if (this.auth.isAuthenticated()) {
       this.auth.getProfile((err: any, profile: any) => {
         this.profile = profile;
         if (profile)
-          userid = profile.name;
+          this.userid= profile.name;
         //userid="dasradh";
-        console.log("Userid" + userid);
-        this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + userid +"&application="+ this.application).subscribe(result => {
+        //console.log("Userid" + this.userid);
+        this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
           this.files = result;
         }, error => console.error(error));
       });
     }
-    userid = "Ananymous";
-    this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + userid +"&application="+ this.application).subscribe(result => {
+   // userid = "Ananymous";
+    this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
       this.publicFiles = result;
     }, error => console.error(error));
 
@@ -149,19 +151,32 @@ export class BlobuploadComponent implements OnInit {
 
           if (this.application == 'Video based Exam') foldername = "dyte-videoxxmas";         
 
-
-          this.http.get(this.baseUrl + '/SetFileAttrib?filename=' + fname + "&userid=" + "Ananymous" + "&application=" + foldername)
+           
+    if (this.auth.isAuthenticated()) {
+      this.auth.getProfile((err: any, profile: any) => {
+        this.profile = profile;
+        if (profile)
+          this.userid = profile.name;
+        //userid="dasradh";
+        console.log("Userid" + this.userid);
+        // this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + userid +"&application="+ this.application).subscribe(result => {
+        //   this.files = result;
+        // }, error => console.error(error));
+      });
+    }
+       
+          this.http.get(this.baseUrl + '/SetFileAttrib?filename=' + fname + "&userid=" + this.userid + "&application=" + foldername)
             .subscribe((response: any) => {
               console.log("uploaded file to directory" + foldername)
 
             });
 
-          this.http.get(this.baseUrl + '/SetTags?filename=' + fname + "&userid=" + this.profile?.name + "&type=video")
-            .subscribe((response: any) => {
-              this.showBlobs();
-              alert('Uploaded  file sucessfully!');
+          // this.http.get(this.baseUrl + '/SetTags?filename=' + fname + "&userid=" + this.profile?.name + "&type=video")
+          //   .subscribe((response: any) => {
+          //     this.showBlobs();
+          //     alert('Uploaded  file sucessfully!');
 
-            });
+          //   });
         }
         else {
           alert('Error occured!');
@@ -185,6 +200,7 @@ export class BlobuploadComponent implements OnInit {
   EnableUpload() {
     if (this.application.length > 0)
       this.isDisabled = false;
+    this.showBlobs();
   }
   
 }

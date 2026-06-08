@@ -3,6 +3,7 @@ import { Component, input, Input, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdventureTimeService } from '../../Shared/services/adventure-time.service';
 import { filesearchattributesdata } from '../../Shared/Models/FileAdditionalInfo';
+import { HttpClient, HttpUrlEncodingCodec } from '@angular/common/http';
 
 @Component({
     selector: 'my-video',
@@ -23,7 +24,9 @@ export class VideoplayerComponent {
     //searchword: string = "";
     data: any[] = [];
 
-    constructor(private sanitizer: DomSanitizer, private atService: AdventureTimeService) {
+    constructor(private sanitizer: DomSanitizer, 
+        private atService: AdventureTimeService
+    , private _http: HttpClient ) {
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk");
 
         this.items = this.atService.getVideodata(this.searchword);
@@ -40,7 +43,7 @@ export class VideoplayerComponent {
                 .subscribe((res: any) => {
                     this.data = res;
                     this.data.forEach(x => console.log(x.name));
-                    if(this.landing) {
+                    if(this.landing) {  
                         this.safeSrc = this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + this.data[0].name));
                     }
                     else
@@ -93,6 +96,21 @@ export class VideoplayerComponent {
 
         };
         this.atService.updateMongoDBFileInfo(this.fileAdditonalData);
+    }   
+    UpdateLandingPage(event: any) {
+        let filename = "\n"+event.changingThisBreaksApplicationSecurity ;
+        filename = HttpUrlEncodingCodec.prototype.encodeValue(filename);
+        filename = filename.replace("www.youtube.com/embed/" ,  'youtu.be/');
+        let url = 'https://talashvideo.azurewebsites.net/PromoteToLandingPage_post?input=' + filename;
+        let body = {
+            fileName: filename,
+        }
+        this._http.post(url, body).subscribe((res: any) => {
+            console.log("Promote to landing page response: " + JSON.stringify(res));
+        }, (err: any) => {
+            console.log("Promote to landing page error: " + JSON.stringify(err));
+        }   );
+        
     }
 }
 interface WeatherForecast1 {

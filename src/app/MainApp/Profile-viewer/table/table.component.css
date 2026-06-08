@@ -1,29 +1,21 @@
-table {
-    border-collapse: collapse;
-    border:0
+.results-section {
+  width: 100%;
 }
 
-th {
-    background-color: green;
-    Color: white;
+.results-header {
+  margin-bottom: 18px;
+  text-align: center;
 }
 
-th, td {
-    width: 150px;
-    text-align: center;
-    border: 1px solid black;
-    padding: 5px
+.results-header h2 {
+  margin: 0;
+  color: #0f5132;
+  font-size: clamp(1.25rem, 2vw, 2rem);
 }
 
-.geeks {
-    border-right: hidden;
-}
-
-.gfg {
-    border-collapse: separate;
-    border-spacing: 0 15px;
-}
-
-h1 {
-    color: green;
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  width: 100%;
 }

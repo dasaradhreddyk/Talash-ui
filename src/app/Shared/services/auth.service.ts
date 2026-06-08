@@ -14,7 +14,7 @@ export class AuthService {
     clientID: AUTH_CONFIG.clientID,
     domain: AUTH_CONFIG.domain,
     responseType: 'token id_token',
-    audience: AUTH_CONFIG.apiUrl,
+    //audience: AUTH_CONFIG.apiUrl,
     redirectUri: AUTH_CONFIG.callbackURL,
     scope: 'openid profile email read:messages'
   });

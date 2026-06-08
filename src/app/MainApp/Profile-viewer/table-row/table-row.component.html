@@ -1,36 +1,20 @@
-<td style="width:100px" wordwrap *ngFor="let col of columns ; last as isLast">
-    <!--<div *ngIf="isLast" class="component-tag-sm">
-        <span>app-table-row</span>
+<article class="result-card">
+  <ng-container *ngFor="let col of columns; last as isLast">
+    <div *ngIf="!isLast" class="result-card__field">
+      {{ character[col] }}
     </div>
-    <div class="col-md-4 img-hover"> <img class="img-responsive img-rounded" src="{{character[col]}}" width="100" /> </div>
-    <div> <a href="{{character[col]}}"> $</a></div>-->
-    <!--<div *ngIf="isLast" class="component-tag-sm">
-        <span>app-table-row</span>
-    </div>-->
-    <div  *ngIf="!isLast" style=" width:200px;overflow-wrap: break-word;" class="text">
-        <span> {{character[col]}}</span>
-    </div>
-    <figure class="col-md-4">
 
-        <a (click)="toggle(character['age'])" class="black-text" target="iframe_a" href="{{character[col]}}"
-            data-size="60x106">
-            <img alt=".." src="{{character[col]}}" width="100" />
-            <div *ngIf="isLast">
-                <button> <a alt=".." href="{{character[col]}}" target="_blank" width="100"> view</a></button> <br>
-                <input type="checkbox" id="rowselect" (click)="toggle(character[col])" /> Book Mark
-
-            </div>
-
-            <h3 class="text-center my-3"></h3>
-        </a>
+    <figure *ngIf="isLast" class="result-card__media">
+      <a (click)="toggle(character['age'])" class="media-link" target="iframe_a" [href]="character[col]">
+        <img class="result-card__image" alt="Search result preview" [src]="character[col]" />
+      </a>
+      <figcaption class="result-card__actions">
+        <a class="view-link" [href]="character[col]" target="_blank" rel="noopener">View</a>
+        <label class="bookmark-toggle">
+          <input type="checkbox" (click)="toggle(character[col])" />
+          <span>Book Mark</span>
+        </label>
+      </figcaption>
     </figure>
-</td>
-
-
-
-<!--<p><a href="https://www.w3schools.com" target="iframe_a">W3Schools.com</a></p>-->
-<script>
-    $(function () {
-        $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
-    });
-</script>
+  </ng-container>
+</article>

@@ -148,7 +148,7 @@ export class ContentuploadComponent {
   showFiles()
   {
     this.getuserName()
-    this.http.get<string[]>(this.baseUrl + '/ListFilesByApplicationv2?userid=' + "dasaradh" +"&applicaiton="+ "videoexams" +"&topic="+this.selectedTopic).subscribe(result => {
+    this.http.get<string[]>(this.baseUrl + '/ListFilesByApplicationv2?userid=' + this.userid +"&applicaiton="+ "videoexams" +"&topic="+this.selectedTopic).subscribe(result => {
       this.publicFiles = result;
     }, error => console.error(error));
 
@@ -200,6 +200,21 @@ export class ContentuploadComponent {
 
     this.http.post(this.baseUrl + '/insertfile', this.fileToUpload)
       .subscribe((response: any) => {
+
+ let userid = "Ananymous";
+         if (this.auth.isAuthenticated()) {
+          
+      this.auth.getProfile((err: any, profile: any) => {
+        this.profile = profile;
+        if (profile)
+          userid = profile.name;
+        //userid="dasradh";
+        console.log("Userid" + userid);
+        this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
+          this.files = result;
+        }, error => console.error(error));
+      });
+    }
         this.fileUpoadInitiated = false;
         this.fileUpload = '';
         if (response == true) {
@@ -207,7 +222,7 @@ export class ContentuploadComponent {
           //SetFileAttrib?filename=english.txt&userid=dasaradh&application=dyte-videoxxmas
           let foldername = "";
 
-          this.http.get(this.baseUrl + '/SetFileAttribV2?filename=' + fname + "&userid=" + "Ananymous" + "&topic=" + this.selectedTopic)
+          this.http.get(this.baseUrl + '/SetFileAttribV2?filename=' + fname + "&userid=" + userid + "&topic=" + this.selectedTopic)
             .subscribe((response: any) => {
               console.log("uploaded file to directory" + foldername)
 

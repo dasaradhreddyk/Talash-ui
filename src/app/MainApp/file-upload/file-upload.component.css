@@ -1,0 +1,81 @@
+.search-card {
+  width: min(100%, 720px);
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #dc3545;
+  border-radius: 14px;
+  background: #f8f9fa;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+.custom-button {
+background-color: #e0e8e6; /* Bright green for attention */
+color: #da3c3c; /* White text for contrast */
+border: none; /* Clean edges */
+padding: 4px 10px; /* Comfortable clickable area */
+font-size: 14px; /* Easy-to-read size */
+font-weight: bold; /* Stands out visually */
+border-radius: 8px; /* Friendly rounded corners */
+cursor: pointer; /* Indicates interactivity */
+transition: all 0.3s ease; /* Smooth animation for hover effects */
+}
+.custom-button1 {
+background-color: #f3c0cf; /* Bright green for attention */
+color: #6b3cda; /* White text for contrast */
+border: none; /* Clean edges */
+padding: 4px 10px; /* Comfortable clickable area */
+font-size: 14px; /* Easy-to-read size */
+font-weight: bold; /* Stands out visually */
+border-radius: 8px; /* Friendly rounded corners */
+cursor: pointer; /* Indicates interactivity */
+transition: all 0.3s ease; /* Smooth animation for hover effects */
+}
+
+.search-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.search-label {
+  flex: 1 1 180px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.search-input {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+}
+
+.search-button {
+  flex: 0 0 auto;
+}
+
+.type-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.type-option {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin: 0;
+}
+
+@media (max-width: 576px) {
+  .search-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}

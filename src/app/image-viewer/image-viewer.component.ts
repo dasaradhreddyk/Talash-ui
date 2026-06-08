@@ -26,7 +26,7 @@ export class ImageViewerComponent implements OnInit {
   data: any[] = [];
   //searchword: string = "";
   @Input() searchword: string="";
-  searchwords1: string="landing-ads";
+  searchwords1: string="landing";
   type: string="video";
   imageList: any[] = [];
   imageCompleteDetails: any[] = [];

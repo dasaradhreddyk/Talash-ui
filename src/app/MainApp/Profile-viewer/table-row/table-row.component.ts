@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AdventureTimeService } from '../../../Shared/services/adventure-time.service';
 
 @Component({
-  selector: '[app-table-row]',
+  selector: 'app-table-row',
   templateUrl: './table-row.component.html',
   styleUrls: ['./table-row.component.css']
 })

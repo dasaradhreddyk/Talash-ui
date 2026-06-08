@@ -1,49 +1,35 @@
-<!-- Grid row -->
-<!--Carousel Wrapper-->
-<div style="height: 200px;" id="video-carousel-example" class="carousel slide carousel-fade" data-ride="carousel">
-    <!--Indicators-->
-    <ol class="carousel-indicators">
-        <li data-target="#video-carousel-example" data-slide-to="0" class="active"></li>
-        <li data-target="#video-carousel-example" data-slide-to="1"></li>
-        <li data-target="#video-carousel-example" data-slide-to="2"></li>
-    </ol>
-<p *ngFor="let ids of videoids; last as isLast">test{{ids}}
-</p>
-<table style="margin:10px;border:0px;text-decoration-thickness: 2;background-color: rgb(237, 239, 239);"> 
-    
+<section class="video-results">
+  <article class="video-card" *ngFor="let ss of safeSrc2; last as isLast">
+    <div class="video-frame">
+      <iframe
+        [src]="ss"
+        title="Talash video result"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+      ></iframe>
+    </div>
 
-<p *ngFor="let ss of safeSrc2; last as isLast">
-<tr>
-        <td>
- <div style="padding: 50px;">
-
-    <iframe  [src]="ss" width="560" height="250" frameborder="0" webkitallowfullscreen mozallowfullscreen
-            allowfullscreen> </iframe>
-            </div>
-            
-        </td>   
-        <td style="vertical-align: middle;font-size: small    ;color:brick  ;">
-            <span><div style="border:0px">    Download  <a href="https://www.socialplug.io/free-tools/youtube-video-downloader">You tube downloder</a></div>
-
-
-                <div style="border:0px">  Share : facebook, twitter , linked in</div>
-
-
-                </span>
-            Add Key words : <input  (keyup)="UpdateKeywords($event)" type="text" /><button (click)="UpdaeKeyWrods(ss)">Update</button>
-            <hr>
-            <details>
-                <summary>How to: creating Tags</summary>
-            <div style="padding:30px;background-color:rgb(240, 236, 243);border-width: 0ch">  <br> <h4>Creating tags: </h4>
-             Step 1: add tags using above keywords edit box.<br>
-              Steps 2: above tabgs can be used in Search in right hand panel.
-              Step 3: similar tag videos can be created as playlist and can be pushed to youtube
-            <br>If any help needed We can add more videos for any requested topic. It will cost 20$ for 300 videos.
-          please contact sales</div>
-          </details>
-        </td>
-   
-</tr>
-
-
-
+    <aside class="video-card__info">
+      <div class="video-action">
+        Download
+        <a href="https://www.socialplug.io/free-tools/youtube-video-downloader" target="_blank" rel="noopener">
+          YouTube downloader
+        </a>
+      </div>
+      <div class="video-action">Share</div>
+      <p>
+        We can add more videos for any requested topic. It will cost $20 for 300 videos.
+      </p>
+      <p  *ngIf="!landing">
+        
+        Promote video to landing page: <button  class="update-button" (click)="UpdateLandingPage(ss)">Promote</button>
+      </p>
+      <label class="keyword-field">
+        <span>Add keywords</span>
+        <input (keyup)="UpdateKeywords($event)" type="text" />
+      </label>
+      <button type="button" class="update-button" (click)="UpdaeKeyWrods(ss)">Update</button>
+    </aside>
+  </article>
+</section>

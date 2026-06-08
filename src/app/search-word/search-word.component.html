@@ -1,6 +1,35 @@
+<section class="search-card">
+  <div class="search-row">
+    <label class="search-label" for="basic-search">Search term</label>
+    <input
+      id="basic-search"
+      class="search-input"
+      type="text"
+      maxlength="150"
+      value="Sydney"
+      [(ngModel)]="placeId"
+    />
+    <button class="btn btn-primary search-button" type="button" (click)="sendNotification(placeId,typeId)">
+      Search
+    </button>
+  </div>
 
-<div class="container">
-  <fieldset >
+  <div class="type-options" role="radiogroup" aria-label="Content type">
+    <label class="type-option">
+      <input type="radio" name="type" value="image" [(ngModel)]="typeId" checked />
+      <span>image</span>
+    </label>
+    <label class="type-option">
+      <input type="radio" name="type" value="video" [(ngModel)]="typeId" />
+      <span>video</span>
+    </label>
+    <label class="type-option">
+      <input type="radio" name="type" value="pdf" [(ngModel)]="typeId" />
+      <span>profiles</span>
+    </label>
+  </div>
+</section>
+<section class="search-card">
     I want to see more :<br>
     <Button class="custom-button" (click)="sendNotification('fashion', 'image')"> Fashion</Button>
     <Button class="custom-button" (click)="sendNotification('village', 'image')"> Village</Button>
@@ -17,59 +46,31 @@
         <Button class="custom-button" > health </Button> <br>
         <input type="text" width="200px"/>
         <Button class="custom-button1" > Add your Choice </Button>
+     <br>
+      <div *ngIf="userid != 'Ananymous'">
+       MyList
+      <select  style="width: 200px;" (click)="loadMylist($event, 'video')">
+      <option *ngFor="let item of files" [value]="item">
+      {{item}}
+    </option>  
+      </select>
+      </div>
+
    
-  </fieldset>
-
-    <fieldset >
-        <input type="text" style="width: 150px;"  size="150" width="48"  maxlength="150" value="Sydney" [(ngModel)]="placeId" />
-        <button class='btn btn-primary' (click)="sendNotification(placeId,typeId)">Search </button>
-        <table>
-            <tr>
-                <td> <input type="radio" name="type" value="image" [(ngModel)]="typeId" checked>image</td>
-                <td> <input type="radio" name="type" value="video" [(ngModel)]="typeId">video</td>
-                <td><input type="radio" name="type" value="pdf" [(ngModel)]="typeId">profiles</td>
-            </tr>
-
-        </table>
-
-        
-        <!-- <fieldset>
-            Advanced    search  By keywords, categories:
-            <input type="text" style="width: 150px;"  size="150" width="48"  maxlength="150" value="education,technology" [(ngModel)]="advancedkeywords" />
-            <button class='btn btn-primary' (click)="SearchByKeywords()">Search </button>
-        </fieldset>  -->
-
-
-
-    </fieldset>
-
-    <fieldset>
-    <legend>Search videos by categories and keywords</legend>
-<div class="ng-autocomplete">
-  <ng-autocomplete
-    [data]="countries"
-    [searchKeyword]="keyword" 
-    placeholder="Enter the keyword / tag Name"
-    (selected)='selectEvent($event)'
-    (inputChanged)='onChangeSearch($event)'
-    (inputFocused)='onFocused($event)'
-    historyIdentifier="countries"
-    [itemTemplate]="itemTemplate"
-    [notFoundTemplate]="notFoundTemplate">
-    width: 300px;
-  </ng-autocomplete>
-
-  <ng-template #itemTemplate let-item>
-    <a [innerHTML]="item.name"></a>
-  </ng-template>
-
-  <ng-template #notFoundTemplate let-notFound>
-    <div [innerHTML]="notFound"></div>
-  </ng-template>
-   <button class='btn btn-primary' (click)="SearchByKeywords()">Search </button>
-     
-</div>
-</fieldset>
-<div style="margin:100px">
-  <angular-tag-cloud [config]="options" [data]="tagCloudData"> </angular-tag-cloud>
-</div>
+</section>
+<section class="search-card">
+  <div class="search-row">
+    <label class="search-label" for="advanced-search">Advanced search by keywords, categories</label>
+    <input
+      id="advanced-search"
+      class="search-input"
+      type="text"
+      maxlength="150"
+      value="education,technology"
+      [(ngModel)]="advancedkeywords"
+    />
+    <button class="btn btn-primary search-button" type="button" (click)="SearchByKeywords()">
+      Search
+    </button>
+  </div>
+</section>

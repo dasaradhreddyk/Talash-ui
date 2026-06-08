@@ -4,20 +4,27 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { resultKeyNameFromField } from '@apollo/client/utilities';
 import { concat } from 'rxjs';
 import { CloudData, CloudOptions, TagCloudComponent } from "angular-tag-cloud-module";
 import { SearchwordService } from './service/searchword.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../Shared/services/auth.service';
 
 @Component({
   selector: 'app-events',
   templateUrl: './search-word.component.html',
   styleUrls: ['./search-word.component.css'],
   standalone: true,
-  imports: [AutocompleteLibModule, FormsModule, TagCloudComponent]
+  imports: [CommonModule, AutocompleteLibModule, FormsModule, TagCloudComponent, HttpClientModule]
 })
 export class SearchWordComponent implements OnInit {
-
+  private baseUrl = 'https://talashfileuploadapi-ctapfke2bwcwdghx.australiasoutheast-01.azurewebsites.net/api/blobstorage';
+  files: string[] = [];
+  profile: any;
+  userid: string = "Ananymous";
+  application: string = "videosearch";
   tagCloudData: CloudData[] = [];
   options: CloudOptions = {
     // if width is between 0 and 1 it will be set to the width of the upper element multiplied by the value
@@ -86,8 +93,21 @@ export class SearchWordComponent implements OnInit {
       name: 'Switzerland',
     }
   ];
-  constructor( public searchwordService: SearchwordService,
+  constructor( private http: HttpClient, public auth: AuthService,public searchwordService: SearchwordService,
     private route: ActivatedRoute) {
+       if (this.auth.isAuthenticated()) {
+      this.auth.getProfile((err: any, profile: any) => {
+        this.profile = profile;
+        if (profile)
+          this.userid= profile.name;
+       
+        this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
+          this.files = result;
+                    console.log("Selected topic is &&&&&&&&&&&&&& " + JSON.stringify(this.files));
+
+        }, error => console.error(error));
+      });
+    }
 
   }
 
@@ -125,6 +145,19 @@ export class SearchWordComponent implements OnInit {
   }
   
   ngOnInit(): void {
+
+     if (this.auth.isAuthenticated()) {
+      this.auth.getProfile((err: any, profile: any) => {
+        this.profile = profile;
+        if (profile)
+          this.userid= profile.name;
+       
+        this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
+          this.files = result;
+          console.log("Selected topic is &&&&&&&&&&&&&& " + JSON.stringify(this.files));
+        }, error => console.error(error));
+      });
+    }
     const contenttype: string | null = new URLSearchParams(window.location.search).get('type');
     const searchword: string | null = new URLSearchParams(window.location.search).get('searchword');
 
@@ -134,7 +167,19 @@ export class SearchWordComponent implements OnInit {
 
     this.searchwordService.InitializeComponent(this);
 
+     const url = this.baseUrl + '/ListFilesByApplication?userid=' + this.userid + '&applicaiton=' + this.application;
+     this.http.get<string[]>(url).subscribe(result => {
+          this.files = result;
+                    console.log("Selected topic is &&&&&&&&&&&&&& " + JSON.stringify(this.files));
+
+        }, (error: any) => console.error(error));   
+      
+
   };
+  loadMylist(value: Event, type: string) {
+    console.log("selected value" + value);
+    //this.searchword.emit({ searchword: value, type: type });
+  }
 
 }
 interface keywordlist {

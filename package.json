@@ -24,7 +24,7 @@
     "@angular/platform-server": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@apollo/client": "^3.0.0",
-    "@auth0/auth0-angular": "^2.2.3",
+    "@auth0/auth0-angular": "^2.9.0",
     "@dytesdk/angular-ui-kit": "^2.0.1",
     "@dytesdk/web-core": "^2.0.6",
     "@emailjs/browser": "^4.4.1",
