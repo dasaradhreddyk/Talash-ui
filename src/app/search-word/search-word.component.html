@@ -20,7 +20,7 @@
       <span>image</span>
     </label>
     <label class="type-option">
-      <input type="radio" name="type" value="video" [(ngModel)]="typeId" />
+      <input type="radio" name="type" value="videosearch" [(ngModel)]="typeId" />
       <span>video</span>
     </label>
     <label class="type-option">
@@ -49,10 +49,10 @@
      <br>
       <div *ngIf="userid != 'Ananymous'">
        MyList
-      <select  style="width: 200px;" (click)="loadMylist($event, 'video')">
-      <option *ngFor="let item of files" [value]="item">
-      {{item}}
-    </option>  
+      <select  style="width: 200px;" (change)="loadMylist($event, 'video')">
+        <option *ngFor="let item of files" [value]="item">
+        {{ formatFileName(item) }}
+      </option>  
       </select>
       </div>
 
@@ -61,16 +61,20 @@
 <section class="search-card">
   <div class="search-row">
     <label class="search-label" for="advanced-search">Advanced search by keywords, categories</label>
-    <input
+    <!-- <input
       id="advanced-search"
       class="search-input"
       type="text"
       maxlength="150"
       value="education,technology"
       [(ngModel)]="advancedkeywords"
-    />
-    <button class="btn btn-primary search-button" type="button" (click)="SearchByKeywords()">
+    /> -->
+    <!-- <button class="btn btn-primary search-button" type="button" (click)="SearchByKeywords()">
       Search
-    </button>
+    </button> -->
+    <select (change)="SearchByKeywords($event)" style="width: 300px;">
+      <option *ngFor="let item of countries" [value]="item.id" >
+        {{ item.name }}
+    </select>
   </div>
 </section>

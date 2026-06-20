@@ -31,11 +31,7 @@ export class FileuploadComponent {
         });
 
         this.http.request(uploadReq).subscribe(event => {
-            console.log("updload is progress")
-            // if (event.type === HttpEventType.UploadProgress)
-            //     this.progress = Math.round(100 * event.loaded / event.total);
-            // else if (event.type === HttpEventType.Response)
-            //     this.message = event.body.toString();
+           
         });
     }
 }  

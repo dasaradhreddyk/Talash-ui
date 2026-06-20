@@ -149,7 +149,7 @@ export class ContentuploadComponent {
   {
     this.getuserName()
     this.http.get<string[]>(this.baseUrl + '/ListFilesByApplicationv2?userid=' + this.userid +"&applicaiton="+ "videoexams" +"&topic="+this.selectedTopic).subscribe(result => {
-      this.publicFiles = result;
+     // this.publicFiles = result;
     }, error => console.error(error));
 
     // get reording files.

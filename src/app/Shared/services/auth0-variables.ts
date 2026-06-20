@@ -14,7 +14,7 @@ export const AUTH_CONFIG: AuthConfig = {
    // callbackURL: 'http://localhost:4200/',
    callbackURL: 'https://talash.azurewebsites.net/',
      authorizationParams: {
-      //  redirect_uri: window.location.origin,
+     //   redirect_uri: window.location.origin,
         redirect_uri: 'https://talash.azurewebsites.net/',
       },
 };

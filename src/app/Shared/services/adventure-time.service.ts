@@ -50,7 +50,6 @@ export class AdventureTimeService {
                     });
 
                     CHARACTERS.push(this.data[0]);
-                    // console.log("charactors" + JSON.stringify(this.data));
                 }, error => console.error(error));
 
 
@@ -79,7 +78,6 @@ export class AdventureTimeService {
         var url = "/data/Updateclicks?input=" + str;
         this.http.get(url).subscribe
             (result => {
-                console.log("deleted content");
             });
     }
     GetFavourites(str: string): Observable<WeatherForecast[]> {
@@ -103,6 +101,7 @@ export class AdventureTimeService {
 
     //video data ..
 
+    
     getVideodata(searchword: string): string[] {
         // var url = "https://sharegoodthings.azurewebsites.net/weatherforecast/GetVideolist?input=" + "searchword";
 
@@ -130,6 +129,17 @@ export class AdventureTimeService {
             );
     }
 
+getvideodataByUserId(user:string, searchword: string): Observable<any[]> {
+      
+        user = "dasaradh@talash.com"
+        var url = "https://talashvideo.azurewebsites.net/v1/VIDEO/" + "dasaradh@talash.com" + "/" + searchword;
+
+
+        return this.http.get<any[]>(url)
+            .pipe(
+                product => this.videoids3 = product
+            );
+    }
 
     createMeeting(userid: string, time: string): Observable<string> {
         //var url = "https://sharegoodthings.azurewebsites.net/weatherforecast/GetVideolist?input=" + "searchword";
@@ -140,14 +150,12 @@ export class AdventureTimeService {
         this.http.post<Observable<any>>(url, { "userid": userid, "schedule": time }).subscribe(
 
             result => {
-                // console.log("service"+ result);
                 var k = JSON.parse(JSON.stringify(result));
                 var kkk: meetingdata = JSON.parse(k)
                 this.meetinginfo = kkk;
             }
         )
 
-        //  console.log("test" + JSON.stringify(this.meetinginfo));
         return of(JSON.stringify(this.meetinginfo));
 
 
@@ -170,25 +178,23 @@ export class AdventureTimeService {
         var url = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/DBSearch/Ananymous/Template/category/OR"
         url = url.replace("category", category);
 
+        console.log(url );
 
         return this.http.get<any[]>(url)
             .pipe(
 
                 vodeo => this.videoids3 = vodeo
-                // console.log(JSON.stringify( "Advanced search"+this.videoids))
             );
     }
 
     public GetKeywordsforVideoData() {
 
         var url = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI/criteria"
-        console.log("url for keywords" + url);
 
         return this.http.get<any[]>(url)
             .pipe(
 
                 vodeo => this.videoids3 = vodeo
-                //console.log(JSON.stringify( "Advanced search"+this.videoids));
             );
 
 
@@ -197,7 +203,6 @@ export class AdventureTimeService {
     public GetKeywordsAndCountforVideoData() {
 
         var url = "https://discussion-eac4ethedca0a0dx.australiaeast-01.azurewebsites.net/YoutubeAPI"
-        console.log("url for keywords" + url);
 
         return this.http.get<any[]>(url)
             .pipe(

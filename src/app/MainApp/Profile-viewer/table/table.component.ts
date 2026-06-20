@@ -25,14 +25,12 @@ export class TableComponent implements OnInit {
   public activatedRoute: ActivatedRoute = new ActivatedRoute;
     constructor(private atService: AdventureTimeService, route: ActivatedRoute, router: Router) {
        // const snapshot: RouterStateSnapshot = route.routerState.snapshot;
-        console.log(route.queryParams); 
         route.queryParams.subscribe(params => {
             let date = params['id'];
             
         });
  router.events.subscribe((val) => {
         // see also
-        console.log(val instanceof NavigationEnd)
     });
     }
     childEventClicked(event: string) {
@@ -59,7 +57,6 @@ export class TableComponent implements OnInit {
       
        //get book marks.
        this.BookMarks = this.atService.getBookmakrs();
-       console.log("bookmarks %%%%%%%%%%"+JSON.stringify(this.BookMarks));
   }
 
 }

@@ -47,19 +47,7 @@ export class ImageViewerComponent implements OnInit {
   
       // }).valueChanges.subscribe((res:any)=>{
       
-      //   this.data = res.data.images;
-      // //  console.log(JSON.stringify(this.data))
-      //    this.data.forEach(x => { 
-      //   //  console.log(x.url);
-      //     this.imageList.push(x.url)
-      //     let imageData: imagedata = {
-      //       url: x.url,likes: x.likes
-      //     };
-      //     this.imageCompleteDetails.push(imageData);
-        
-      //   });      
-        
-      // })
+      
   
     
 
@@ -165,7 +153,6 @@ sendMessage(message: string): void {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    console.log("search word in image viewer &&&&&&&&&&&&&&&" + this.searchword);
     let query = this.imageViewerService.getBookById1;
      if(this.searchword == "" || this.searchword == "Pets" || this.searchword == "Fashion"
        || this.searchword == "Sports")
@@ -181,13 +168,10 @@ sendMessage(message: string): void {
         fetchPolicy: 'no-cache'     
   
       }).valueChanges.subscribe((res:any)=>{
-       // console.log("Changes detected" + JSON.stringify(res.data.images)  );
         
         this.data = res.data.images;
-      //  console.log(JSON.stringify(this.data))
          
         this.data.forEach(x => { 
-        //  console.log(x.url);
        //   this.imageList.push(x.url)
           let imageData: imagedata = {
             url: x.url,likes: x.likes
@@ -211,15 +195,12 @@ sendMessage(message: string): void {
       }).valueChanges.subscribe((res:any)=>{
         
         this.data = res.data.imagesByCategory;
-        console.log("Changes detected" + JSON.stringify(this.data)  );
        
-         console.log("Changes detected" + JSON.stringify(res)  );
         this.data.forEach(x => { 
       
           let imageData: imagedata = {
             url: x.url,likes: x.likes
           };
-          console.log("new Image Data: " + JSON.stringify(imageData));
           this.imageCompleteDetails.push(imageData);
           this.imageCompleteDetails.reverse(); // Reverse the array to show the latest images first
         
@@ -228,11 +209,8 @@ sendMessage(message: string): void {
       })
 
       }
-     // console.log("Image List: " + JSON.stringify(this.imageList));
-      //console.log("Image Complete Details: " + JSON.stringify(this.imageCompleteDetails));  
   }
   imageURL(url :any) {
-   // console.log(this.sanitizer.bypassSecurityTrustUrl(url));
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
   ngInit()

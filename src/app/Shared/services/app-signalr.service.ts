@@ -24,7 +24,6 @@ export class AppSignalRService {
       this.hubConnection
         .start()
         .then(() => {
-          console.log('Connection established with SignalR hub');
           observer.next();
           observer.complete();
         })
@@ -38,7 +37,6 @@ export class AppSignalRService {
   receiveMessage(): Observable<string> {
     return new Observable<string>((observer) => {
       this.hubConnection.on('ReceiveMessage', (message: string) => {
-       // console.log(message);
         observer.next(message);
       });
     });

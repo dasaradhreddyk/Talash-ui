@@ -22,6 +22,7 @@ import { AuthService } from '../Shared/services/auth.service';
 export class SearchWordComponent implements OnInit {
   private baseUrl = 'https://talashfileuploadapi-ctapfke2bwcwdghx.australiasoutheast-01.azurewebsites.net/api/blobstorage';
   files: string[] = [];
+  files1: string[] = [];
   profile: any;
   userid: string = "Ananymous";
   application: string = "videosearch";
@@ -103,7 +104,6 @@ export class SearchWordComponent implements OnInit {
        
         this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
           this.files = result;
-                    console.log("Selected topic is &&&&&&&&&&&&&& " + JSON.stringify(this.files));
 
         }, error => console.error(error));
       });
@@ -117,10 +117,9 @@ export class SearchWordComponent implements OnInit {
   placeId!: string;
   advancedkeywords: string = "";
 
-  SearchByKeywords() {
+  SearchByKeywords(e: any) {
     // this.advancedkeywords= "aivideo";
-    console.log("advanced search KKK);" + this.advancedkeywords);
-    this.searchword.emit({ searchword: this.advancedkeywords, type: 'advancedsearch' });
+    this.searchword.emit({ searchword: e.target.value, type: 'advancedsearch' });
   }
   sendNotification(placeId: any, typeId: any) {
 
@@ -128,14 +127,12 @@ export class SearchWordComponent implements OnInit {
   }
   
   selectEvent(item: any) {
-    console.log(JSON.stringify(item));
     this.advancedkeywords = item.id;
-    console.log("selected item" + this.advancedkeywords);
     // do something with selected item
   }
 
   onChangeSearch(search: string) {
-    console.log('selected *****************' + search);
+    
     this.advancedkeywords = search;
 
   }
@@ -154,7 +151,6 @@ export class SearchWordComponent implements OnInit {
        
         this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
           this.files = result;
-          console.log("Selected topic is &&&&&&&&&&&&&& " + JSON.stringify(this.files));
         }, error => console.error(error));
       });
     }
@@ -170,17 +166,40 @@ export class SearchWordComponent implements OnInit {
      const url = this.baseUrl + '/ListFilesByApplication?userid=' + this.userid + '&applicaiton=' + this.application;
      this.http.get<string[]>(url).subscribe(result => {
           this.files = result;
-                    console.log("Selected topic is &&&&&&&&&&&&&& " + JSON.stringify(this.files));
-
+          result.forEach((element: any) => {
+            this.files1.push( element.replace(this.userid, "") );
+          });
         }, (error: any) => console.error(error));   
       
 
   };
-  loadMylist(value: Event, type: string) {
-    console.log("selected value" + value);
-    //this.searchword.emit({ searchword: value, type: type });
+  loadMylist(v: any, type: string) {
+    let search = JSON.stringify(v.target.value);   
+   search = search.split("/")[1];
+    search= search.split(".")[0];
+   //search = v.target.value;
+    this.searchword.emit({ searchword: search +".txt", type: "video" });
   }
-
+  
+  formatFileName(item: string): string {
+    if (!item) return '';
+    let name = String(item).replace(/^['"]|['"]$/g, '');
+    const parts = name.split(/[/\\]/);
+    name = parts[parts.length - 1];
+    // replace exact userid occurrences with 'black'
+    if (this.userid && this.userid !== 'Ananymous') {
+      try {
+        name = name.replace(new RegExp(this.userid, 'g'), 'black');
+      } catch (e) {
+        // fallback: simple replace
+        name = name.split(this.userid).join('black');
+      }
+    }
+    // if still looks like it has a leading user prefix (eg "user123_filename"), replace that prefix
+    name = name.replace(/^[^_\-\s]+(?=[_\-\s])/, 'black');
+    return name;
+  }
+   
 }
 interface keywordlist {
   id: string;

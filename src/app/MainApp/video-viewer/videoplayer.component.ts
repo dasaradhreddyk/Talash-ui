@@ -4,6 +4,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AdventureTimeService } from '../../Shared/services/adventure-time.service';
 import { filesearchattributesdata } from '../../Shared/Models/FileAdditionalInfo';
 import { HttpClient, HttpUrlEncodingCodec } from '@angular/common/http';
+import { AuthService } from 'src/app/Shared/services/auth.service';
+import { concatMap } from 'rxjs';
 
 @Component({
     selector: 'my-video',
@@ -23,26 +25,73 @@ export class VideoplayerComponent {
     items: Array<string>;
     //searchword: string = "";
     data: any[] = [];
+    userid: string = "Ananymous";
+    profile: any;
 
     constructor(private sanitizer: DomSanitizer, 
-        private atService: AdventureTimeService
+        private atService: AdventureTimeService,
+        public auth: AuthService
     , private _http: HttpClient ) {
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk");
 
         this.items = this.atService.getVideodata(this.searchword);
+        
         // this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/c9F5kMUfFKk"));
 
     }
     ngOnChanges(changes: SimpleChanges) {
-
-        //console.log("**** searchword changed to " + this.type);
-
-        if (this.type != 'video' && this.type != 'advancedsearch') return;
-        if (this.type === 'video') {
+         if (this.landing === true) {
             this.atService.getvideodata1(this.searchword)
                 .subscribe((res: any) => {
                     this.data = res;
-                    this.data.forEach(x => console.log(x.name));
+                  
+                         this.safeSrc = this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + this.data[0].name));
+                    
+                    
+                }, (err: any) => {
+                    console.log(err);
+                });
+                return;
+        }
+
+        // add delay 
+         setTimeout(() => {
+    
+    }, 1000);
+
+       
+       // if (this.auth.isAuthenticated()) 
+       {
+      this.auth.getProfile((err: any, profile: any) => {
+        this.profile = profile;
+        if (profile)
+          this.userid= profile.name;
+           if(this.type === 'video'  && this.landing == false && this.userid !== "Ananymous") {
+        
+          this.safeSrc2 = [];
+            this.atService.getvideodataByUserId(this.userid,this.searchword)
+                .subscribe((res: any) => {
+                    this.data = res;
+                    
+                    this.data.forEach(x => this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + x.name)));
+
+                }, (err: any) => {
+                    console.log(err);
+                });
+            return;
+           }
+       
+      });
+    }
+
+       
+
+
+        if (this.type === 'videosearch') {
+            this.atService.getvideodata1(this.searchword)
+                .subscribe((res: any) => {
+                    this.data = res;
+                  
                     if(this.landing) {  
                         this.safeSrc = this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + this.data[0].name));
                     }
@@ -55,36 +104,31 @@ export class VideoplayerComponent {
         }
         else if (this.type === 'advancedsearch') {
             this.safeSrc2 = [];
-            // console.log(" *******request for video by cateory"+ this.searchword);
             this.atService.GetVidoesByCategory(this.searchword).subscribe((res: any) => {
                 this.data = res;
                 this.data.forEach(x => {
                     if (x.fileName != null && x.fileName.includes("youtube")
                     ) {
-                        console.log("**** video data " + x.fileName);
-
-
-
+                        
                         // if(x.filename != null && x.fileName.includes("youtube")) 
                         this.safeSrc2.push(this.sanitizer.bypassSecurityTrustResourceUrl(x.fileName));
-                        // console.log("**** video data " + x.fileName);
+                        
                     }
                 })
             }, (err: any) => {
                 console.log(err);
             });
         }
-        console.log("**** SEARCH data " + JSON.stringify(this.safeSrc2));
+
     }
     UpdateKeywords(event: any) {
         this.keywords = event.target.value;
-        console.log("keywords updated" + this.keywords);
+       
     }
     UpdaeKeyWrods(event: any) {
-        // console.log("keywords"+ this.keywords);
-        // console.log("filename: "+JSON.stringify(event));
+       
         let filename = event.changingThisBreaksApplicationSecurity;
-        console.log(filename);
+       
         this.fileAdditonalData = {
             username: "Anonymous",
             fileName: filename,

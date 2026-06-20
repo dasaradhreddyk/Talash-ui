@@ -16,7 +16,6 @@ export class PreviewComponent implements OnInit {
      }
     ngOnChanges(changes: SimpleChanges) {
        
-        console.log("Preview" + this.url);
         
 
     }

@@ -41,7 +41,6 @@ export class BlobuploadComponent implements OnInit {
         if (profile)
           this.userid= profile.name;
         //userid="dasradh";
-        //console.log("Userid" + this.userid);
         this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
           this.files = result;
         }, error => console.error(error));
@@ -49,7 +48,7 @@ export class BlobuploadComponent implements OnInit {
     }
    // userid = "Ananymous";
     this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + this.userid +"&applicaiton="+ this.application).subscribe(result => {
-      this.publicFiles = result;
+    //  this.publicFiles = result;
     }, error => console.error(error));
 
 
@@ -157,11 +156,7 @@ export class BlobuploadComponent implements OnInit {
         this.profile = profile;
         if (profile)
           this.userid = profile.name;
-        //userid="dasradh";
-        console.log("Userid" + this.userid);
-        // this.http.get<string[]>(this.baseUrl + '/ListFilesByApplication?userid=' + userid +"&application="+ this.application).subscribe(result => {
-        //   this.files = result;
-        // }, error => console.error(error));
+       
       });
     }
        
@@ -171,12 +166,6 @@ export class BlobuploadComponent implements OnInit {
 
             });
 
-          // this.http.get(this.baseUrl + '/SetTags?filename=' + fname + "&userid=" + this.profile?.name + "&type=video")
-          //   .subscribe((response: any) => {
-          //     this.showBlobs();
-          //     alert('Uploaded  file sucessfully!');
-
-          //   });
         }
         else {
           alert('Error occured!');

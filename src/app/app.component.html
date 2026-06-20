@@ -57,12 +57,12 @@
   <div class="content-shell">
     <section class="content-main">
       <div class="content-results">
-        <my-video *ngIf="type === 'video' || type === 'advancedsearch'" [searchword]="searchword" [type]="type">
+        <my-video *ngIf="type === 'video' || type === 'advancedsearch' || type === 'videosearch'" [landing]="false" [searchword]="searchword" [type]="type">
         </my-video>
 
         <app-image-viewer *ngIf="type === 'image'" [searchword]="searchword"></app-image-viewer>
 
-        <div class="result-scroll" *ngIf="type !== 'video' && type !== 'image' && type !== 'advancedsearch'">
+        <div class="result-scroll" *ngIf="type !== 'video' && type !== 'image' && type !== 'advancedsearch' && type !== 'videosearch'">
           <app-table [searchword]="searchword" [type]="type"></app-table>
         </div>
 
