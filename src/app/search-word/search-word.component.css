@@ -1,56 +1,98 @@
+/* Compact search card with soft yellow->pink flow (no orange) */
 .search-card {
-  width: min(100%, 720px);
-  margin: 20px auto;
-  padding: 20px;
-  border: 2px solid #dc3545;
-  border-radius: 14px;
-  background: #f8f9fa;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  /* reduced max width by ~30% (further compact) */
+  width: min(100%, 402px);
+  margin: 10px auto;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  /* gold -> white -> blue flowing gradient */
+  background: linear-gradient(120deg, #ffd700 0%, #ffffff 50%, #0d6efd 100%);
+  background-size: 200% 200%;
+  animation: flow 12s ease-in-out infinite;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  font-size: 13px;
 }
 
+/* Search-specific theme tokens (override global orange for this component) */
+.search-card {
+  --search-primary: #2e7d32; /* dark green */
+  --search-accent: #66bb6a;  /* light green */
+  --search-on-primary: #ffffff;
+}
 
+/* Buttons: use green accent, compact */
 .custom-button {
-background-color: #e0e8e6; /* Bright green for attention */
-color: #da3c3c; /* White text for contrast */
-border: none; /* Clean edges */
-padding: 4px 10px; /* Comfortable clickable area */
-font-size: 14px; /* Easy-to-read size */
-font-weight: bold; /* Stands out visually */
-border-radius: 8px; /* Friendly rounded corners */
-cursor: pointer; /* Indicates interactivity */
-transition: all 0.3s ease; /* Smooth animation for hover effects */
+  background-color: var(--search-primary);
+  color: var(--search-on-primary);
+  border: none;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
+
+.custom-button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
 
 .search-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 6px;
   align-items: center;
 }
 
 .search-label {
-  flex: 1 1 180px;
+  flex: 0 0 90px;
   margin: 0;
   font-weight: 700;
+  font-size: 12px;
 }
 
 .search-input {
-  flex: 1 1 220px;
+  flex: 1 1 160px;
   min-width: 0;
-  padding: 10px 12px;
-  border: 1px solid #ced4da;
-  border-radius: 8px;
+  padding: 6px 8px;
+  border: 1px solid #d6d6d6;
+  border-radius: 6px;
+  font-size: 12px;
 }
 
 .search-button {
   flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 12px;
+  background-color: var(--search-accent);
+  color: var(--search-on-primary);
+  border: 0;
+  border-radius: 6px;
+}
+
+.search-button:hover {
+  background-color: color-mix(in srgb, var(--search-primary) 80%, black 20%);
+}
+
+@keyframes flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Make the search card edge-to-edge feel when scrolling */
+.search-card { scroll-margin: 18px; }
+
+@media (max-width: 720px) {
+  .search-card { width: calc(100% - 24px); padding: 12px; }
+  .custom-button { width: 100%; }
 }
 
 .type-options {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .type-option {
