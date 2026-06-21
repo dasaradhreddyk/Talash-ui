@@ -6,8 +6,8 @@
   padding: 12px;
   border-radius: 10px;
   border: none;
-  /* gold -> white -> blue flowing gradient */
-  background: linear-gradient(120deg, #ffd700 0%, #ffffff 50%, #0d6efd 100%);
+  /* pink -> light-pink flowing gradient */
+  background: linear-gradient(120deg, #ff69b4 0%, #ffd6ec 100%);
   background-size: 200% 200%;
   animation: flow 12s ease-in-out infinite;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
