@@ -1,32 +1,26 @@
  <div   style="height:250px" >
       <my-video [searchword]="searchwords1" [landing]="true" [type]="type"></my-video>                          
  </div>                      
-  <br><br><br><br><br><br><br>
-<ul  class="no-bullets">
-    <li *ngFor="let item of imageCompleteDetails">
-      <!-- <div class="myDIV" >&#x1F6C8;</div>   -->
-        <img  class="responsive"  [src]="item.url" />
-         <details style="background-color: rgb(209, 212, 245);width:10  0%;"> 
-            <summary></summary>
-            
-              <div  ><br><img height="30" width="30" src="https://static.vecteezy.com/system/resources/previews/000/420/238/original/like-icon-vector-illustration.jpg">{{item.likes}}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button (click)="UpdateLikes(item.url)" class="btn btn-primary"> Like</button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input height="40" width="60" class="btn btn-light" (click)="deleteItem(item.url)" type="image" src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" />
-              <a href={{item.url}} target="_blank"><input height="40" width="60" class="btn btn-light" (click)="downloadItem(item.url)" type="image" src="https://as2.ftcdn.net/jpg/02/04/06/93/1000_F_204069350_87EUPLhsHIuUVR2yHM7qhMuVNBtpvqLt.jpg" /></a>
-
-        
-               <!-- <star-rating [rating]="item.rating" [starSize]="20" [readOnly]="true"></star-rating> -->
-              <!-- <mat-star-rating></mat-star-rating> -->
-
-              </div>
-         </details>
-        
-      
-      
-      
-      
-      </li>
-        
-      <li></li>
+  <br><br><br>
+<ul class="image-list no-bullets">
+    <li class="image-card" *ngFor="let item of imageCompleteDetails">
+      <img class="responsive" [src]="item.url" alt="Image preview" />
+      <div class="image-toolbar">
+        <span class="toolbar-group">
+          <span class="toolbar-icon">♥</span>
+          <span class="toolbar-text">{{item.likes}}</span>
+        </span>
+        <div class="image-actions">
+          <button type="button" class="toolbar-button toolbar-share" aria-label="Share">
+            <span class="toolbar-only-icon">🔗</span>
+          </button>
+          <button type="button" class="toolbar-button toolbar-like" aria-label="Like" (click)="UpdateLikes(item.url)">
+            <span class="toolbar-only-icon">❤️</span>
+          </button>
+          <a class="toolbar-button toolbar-download" aria-label="Download" [href]="item.url" target="_blank" rel="noreferrer">
+            <span class="toolbar-only-icon">⬇️</span>
+          </a>
+        </div>
+      </div>
+    </li>
 </ul>

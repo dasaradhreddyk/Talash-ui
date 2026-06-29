@@ -1,19 +1,140 @@
-ul.no-bullets {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margins */
+ul.no-bullets,
+ul.image-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
-ul{
-    -webkit-columns: 3;
-    -moz-columns: 3;
-    columns: 3;
-    background-color:white;
-    
+
+.image-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: 14px;
+  justify-content: center;
+  padding: 0;
+}
+
+.image-card {
+  background: #ffffff;
+  border: 1px solid rgba(16, 33, 63, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(13, 38, 75, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .responsive {
-    width:300px;height:270px;padding-top:9%;position:inherit;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px 14px;
+  background: #f7f9ff;
+}
+
+.image-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.toolbar-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #23304f;
+  font-weight: 700;
+}
+
+.toolbar-icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: transparent;
+  color: #0b4dcf;
+  font-size: 12px;
+  box-shadow: none;
+}
+
+.toolbar-text {
+  font-size: 12px;
+}
+
+.toolbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  text-decoration: none;
+}
+
+.toolbar-only-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 50%;
+}
+
+.toolbar-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(16, 33, 63, 0.14);
+}
+
+.toolbar-share {
+  background: rgba(111, 184, 255, 0.18);
+  color: #0d47a1;
+}
+
+.toolbar-like {
+  background: rgba(255, 138, 128, 0.18);
+  color: #b71c1c;
+}
+
+.toolbar-download {
+  background: rgba(129, 212, 250, 0.18);
+  color: #0277bd;
+}
+
+@media (max-width: 840px) {
+  .image-list {
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
   }
+}
+
+@media (max-width: 640px) {
+  .image-list {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .image-list {
+    grid-template-columns: 1fr;
+  }
+}
   
   .hide {
   display: absolute;

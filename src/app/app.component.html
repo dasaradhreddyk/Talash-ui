@@ -15,20 +15,37 @@
         <app-profile></app-profile>
       </a>
       <button *ngIf="auth.isAuthenticated()" type="button" class="btnlogin" (click)="auth.logout()">
-        Log out
+        <span class="button-icon">🚪</span>
+        <span>Log out</span>
       </button>
       <button *ngIf="!auth.isAuthenticated()" type="button" class="btnlogin" (click)="auth.login()">
-        Login
+        <span class="button-icon">🔒</span>
+        <span>Login</span>
       </button>
     </div>
   </header>
 
   <nav class="action-bar" aria-label="Main actions">
-    <button type="button" (click)="ShowHidePanels('share')" class="bigbuttons1">Share Video</button>
-    <button type="button" (click)="ShowHidePanels('upload')" class="bigbuttons1">Upload Data</button>
-    <button type="button" (click)="ShowHidePanels('faq')" class="bigbuttons1">App store</button>
-    <button type="button" (click)="ShowHidePanels('chatrooms')" class="bigbuttons1">Chat rooms</button>
-    <button type="button" class="bigbuttons1">Buy / Sell Video</button>
+    <button type="button" (click)="ShowHidePanels('share')" class="bigbuttons1 btn-share">
+      <span class="button-icon">📤</span>
+      <span>Share Video</span>
+    </button>
+    <button type="button" (click)="ShowHidePanels('upload')" class="bigbuttons1 btn-upload">
+      <span class="button-icon">⬆️</span>
+      <span>Upload Data</span>
+    </button>
+    <button type="button" (click)="ShowHidePanels('faq')" class="bigbuttons1 btn-store">
+      <span class="button-icon">🏬</span>
+      <span>App store</span>
+    </button>
+    <button type="button" (click)="ShowHidePanels('chatrooms')" class="bigbuttons1 btn-chat">
+      <span class="button-icon">💬</span>
+      <span>Chat rooms</span>
+    </button>
+    <button type="button" class="bigbuttons1 btn-market">
+      <span class="button-icon">🛒</span>
+      <span>Buy / Sell Video</span>
+    </button>
   </nav>
 
   <section *ngIf="showSharePanel" class="utility-panel">

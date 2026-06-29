@@ -50,7 +50,7 @@ body.modal-open {
      body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #ffe5e8, #ffffff);
             color: #333;
             min-height: 100vh;
             display: flex;
@@ -61,14 +61,14 @@ body.modal-open {
         .container {
             width: 100%;
             max-width: 1100px;
-            background: #fff;
+            background: #ffffff;
             border-radius: 16px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
             overflow: hidden;
         }
         .header {
             padding: 28px 32px 22px;
-            background: #4e5ede;
+            background: linear-gradient(135deg, #ffd3d8, #ffa6b0);
             color: #fff;
         }
         .header h1 {

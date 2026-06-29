@@ -6,8 +6,8 @@
   padding: 12px;
   border-radius: 10px;
   border: none;
-  /* pink -> light-pink flowing gradient */
-  background: linear-gradient(120deg, #ff69b4 0%, #ffd6ec 100%);
+  /* gold -> silver flowing gradient */
+  background: linear-gradient(120deg, #f2c94c 0%, #c4c4c4 100%);
   background-size: 200% 200%;
   animation: flow 12s ease-in-out infinite;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
@@ -28,6 +28,7 @@
   color: var(--search-on-primary);
   border: none;
   padding: 6px 8px;
+  margin: 6px 4px;
   font-size: 13px;
   font-weight: 700;
   border-radius: 6px;
@@ -63,6 +64,7 @@
 .search-button {
   flex: 0 0 auto;
   padding: 6px 10px;
+  margin: 6px 4px;
   font-size: 12px;
   background-color: var(--search-accent);
   color: var(--search-on-primary);

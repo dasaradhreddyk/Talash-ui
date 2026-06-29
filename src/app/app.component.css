@@ -7,23 +7,28 @@
 }
 
 .talash-hero {
- background-color: green;
   display: grid;
   grid-template-columns: auto minmax(220px, 1fr) auto;
   gap: 20px;
   align-items: center;
   padding: 24px;
-  background: #d1bef0;
-  border: 1px solid #d9e1ec;
+  background: linear-gradient(90deg, #ffffff 0%, #6e7b43 100%);
+  background-image: linear-gradient(90deg, #ffffff 0%, #6e7b43 100%), repeating-linear-gradient(45deg, rgba(192, 192, 192, 0.24), rgba(192, 192, 192, 0.24) 8px, transparent 8px, transparent 16px);
+  background-blend-mode: overlay;
+  border: 1px solid rgba(149, 180, 108, 0.35);
   border-radius: 8px;
-  box-shadow: 0 10px 28px rgba(31, 42, 68, 0.08);
+  box-shadow: 0 10px 28px rgba(31, 42, 68, 0.12);
 }
 
 .talash-hero__logo {
   width: 918px;
-  height: 150px;
+  height: 100px;
   max-width: 28vw;
-  
+  filter: saturate(1.1) hue-rotate(0deg) brightness(1.1) contrast(1.05);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff 0%, #ffe5e5 100%);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 205, 205, 0.6);
 }
 
 
@@ -63,32 +68,107 @@
 .action-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   margin: 18px 0;
 }
 
 .bigbuttons1,
-.btnlogin,
 .panel-action,
 .pricing-card button {
   min-height: 42px;
   border: 0;
-  border-radius: 6px;
+  border-radius: 14px;
   color: #ffffff;
-  background: #1663c7;
+  background: linear-gradient(135deg, #ff4b4b 0%, #ff9a3c 100%);
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.bigbuttons1 {
-  width: auto;
-  min-width: 148px;
-  padding: 0 18px;
-  font-size: 15px;
+.btnlogin {
+  min-height: 43px;
+  padding: 0 22px;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #0a0a0a 0%, #1f1f1f 45%, #3b3b3b 100%);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.btnlogin,
+.btnlogin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.18), transparent 35%);
+  opacity: 0.65;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.btnlogin:hover::before {
+  opacity: 0.85;
+}
+
+.btnlogin:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 50%, #484848 100%);
+}
+
+.btnlogin:active {
+  transform: translateY(1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: linear-gradient(145deg, #141414 0%, #2a2a2a 100%);
+}
+
+.bigbuttons1 {
+  width: auto;
+  min-width: 160px;
+  padding: 0 16px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 10px 24px rgba(22, 99, 199, 0.12);
+}
+
+.button-icon {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+  font-size: 14px;
+}
+
+.btnlogin .button-icon {
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+  border: none;
+}
+
+.bigbuttons1.btn-share,
+.bigbuttons1.btn-upload,
+.bigbuttons1.btn-store,
+.bigbuttons1.btn-chat,
+.bigbuttons1.btn-market {
+  background: linear-gradient(135deg, #ff4b4b 0%, #ff9a3c 100%);
+}
+
 .panel-action,
 .pricing-card button {
   padding: 0 16px;
@@ -96,48 +176,14 @@
 }
 
 .bigbuttons1:hover,
-.btnlogin:hover,
 .panel-action:hover,
 .pricing-card button:hover {
-  background: #0e4fa1;
-  box-shadow: 0 8px 18px rgba(22, 99, 199, 0.22);
+  background: #5aa85a;
+  box-shadow: 0 8px 18px rgba(124, 197, 118, 0.22);
   transform: translateY(-1px);
 }
 
-.utility-panel {
-  margin-bottom: 18px;
-  padding: 18px;
-  background: #ffffff;
-  border: 1px solid #d9e1ec;
-  border-radius: 8px;
-}
 
-.utility-panel details {
-  user-select: none;
-}
-
-.utility-panel summary {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 12px;
-  color: #10213f;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.utility-panel summary::-webkit-details-marker {
-  display: none;
-}
-
-.utility-panel .icon {
-  margin-left: auto;
-  transition: transform 0.2s ease;
-}
-
-.utility-panel details[open] .icon {
-  transform: rotate(180deg);
-}
 
 .share-link {
   display: inline-block;
@@ -223,18 +269,8 @@
   background: #fbfcfe;
 }
 
-.services-grid h3,
-.pricing-card h3 {
-  margin: 0 0 8px;
-  color: #10213f;
-  font-size: 18px;
-}
 
-.services-grid p,
-.pricing-card li {
-  color: #5e6a7d;
-  line-height: 1.5;
-}
+
 
 .pricing-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -246,22 +282,7 @@
   align-content: space-between;
 }
 
-.pricing-card ul {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding-left: 20px;
-}
 
-.pricing-card strong {
-  color: #10213f;
-  font-size: 26px;
-}
-
-.pricing-card--highlight {
-  border-color: #93b5e9;
-  background: #f2f6ff;
-}
 
 .responsive {
   width: 100%;
